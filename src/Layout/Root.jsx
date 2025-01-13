@@ -1,9 +1,10 @@
+import Navbar from "../Pages/Shared/Navbar";
 
 
 const Root = () => {
     return (
         <div>
-            This is Root 
+            <Navbar/> 
         </div>
     );
 };
