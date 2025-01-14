@@ -14,6 +14,7 @@ const navigate=useNavigate();
         try{
             await  signInUser(email,password)
             navigate('/')
+            toast.success('Signin successful')
         }catch(err){
             toast.error(err.message)
         }

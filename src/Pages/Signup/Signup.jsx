@@ -1,10 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import { imageUpload } from "../../Api/utils";
+import toast from "react-hot-toast";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+
+import GoogleLogin from "../../Components/SocialLogin/googleLogin";
+
 
 const Signup = () => {
   const { createUser, setUser, updateUserProfile } = useAuth();
   const navigate = useNavigate();
+  const axiosPublic=useAxiosPublic()
   const handleSignup = async (e) => {
     e.preventDefault();
     const form = e.target;
@@ -12,14 +18,27 @@ const Signup = () => {
     const email = form.email.value;
     const password = form.password.value;
     const image = form.image.files[0];
+    const role= form.role.value;
+    // return console.log({ name, email, password,role});
     const photoURL = await imageUpload(image);
 
-    console.log({ name, email, password, photoURL });
+    
     createUser(email, password)
-    .then((data) => {
+    .then( async (data) => {
+console.log(data);
       updateUserProfile(name, photoURL);
       setUser(data);
+
+      const userInfo = {
+        name,
+        email,
+        photoURL,
+        role
+      }
+     const {data:users} = await axiosPublic.post('/users',userInfo)
+console.log(users);
       navigate("/");
+     toast.success('Signup successful')
     });
   };
   return (
@@ -62,6 +81,20 @@ const Signup = () => {
               <label className="label">
                 <span className="label-text">Email</span>
               </label>
+              <select name="role" className="select select-bordered w-full max-w-xs">
+                <option value='select Role'>
+                 Select Role
+                </option>
+                <option value='student'>Student</option>
+                <option value='tutor'>Tutor</option>
+                <option value='admin'>Admin</option>
+                
+              </select>
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Email</span>
+              </label>
               <input
                 name="email"
                 type="email"
@@ -87,6 +120,8 @@ const Signup = () => {
                 Signup
               </button>
             </div>
+            <div className="divider">OR</div>
+          <GoogleLogin/>
           </form>
         </div>
       </div>

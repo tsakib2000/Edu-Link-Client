@@ -10,10 +10,10 @@ const Navbar = () => {
   
 console.log(user);
     const navbarLink=<>
-  <li><a>Dashboard</a></li>
+  <li><Link to='/dashboard'>Dashboard</Link></li>
     </>
     return (
-<div className="navbar ">
+<div className="navbar fixed backdrop-blur-md w-11/12 text-white z-10 top-0">
   <div className="navbar-start">
     <div className="dropdown">
       <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -32,7 +32,7 @@ console.log(user);
       </div>
       <ul
         tabIndex={0}
-        className=" *:font-bold menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+        className=" bg-[#58a6af] *:font-bold menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
       {navbarLink}
      
       
@@ -49,7 +49,7 @@ console.log(user);
   <div className="navbar-end gap-4">
 {
   user ? <>
-   <Button onClick={signOutUser} className="!bg-[#58a6af]" variant="contained">Sign Out</Button>
+   <Button onClick={signOutUser} className="!bg-[#58a6af] !font-semibold" variant="contained">Sign Out</Button>
    <div className="avatar">
   <div className="ring-[#58a6af] ring-offset-base-100 w-12 rounded-full ring ring-offset-2">
     <img referrerPolicy="no-referrer" src={user?.photoURL} />
