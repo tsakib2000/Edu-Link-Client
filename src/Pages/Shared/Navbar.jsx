@@ -1,8 +1,13 @@
-import { Button } from "@mui/material";
+import { Avatar, Button } from "@mui/material";
+import { Link } from 'react-router-dom';
+import useAuth from "../../Hooks/useAuth";
 
 
 
 const Navbar = () => {
+  const {user,signOutUser}=useAuth();
+
+console.log(user);
     const navbarLink=<>
   <li><a>Dashboard</a></li>
     </>
@@ -41,8 +46,14 @@ const Navbar = () => {
     </ul>
   </div>
   <div className="navbar-end gap-4">
-  <Button className="!bg-[#58a6af]" variant="contained">Sign in</Button>
-  <Button className="!bg-[#58a6af]" variant="contained">Sign Up</Button>
+{
+  user ? <>
+   <Button onClick={signOutUser} className="!bg-[#58a6af]" variant="contained">Sign Out</Button>
+   <Avatar alt="Remy Sharp" src={user?.photoURL} />
+  </>:<>
+  <Button className="!bg-[#58a6af]" variant="contained"><Link to='signin'>Sign in</Link></Button>
+  <Button className="!bg-[#58a6af]" variant="contained"><Link to='signup'>Sign up</Link></Button></>
+}
   </div>
 </div>
     );
