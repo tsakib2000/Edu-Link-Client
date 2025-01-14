@@ -1,22 +1,27 @@
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
+import { imageUpload } from "../../Api/utils";
 
 const Signup = () => {
-    const {createUser}=useAuth();
-    const navigate=useNavigate()
-    const handleSignup=e=>{
-        e.preventDefault();
-const form=e.target;
-const name=form.name.value;
-const email=form.email.value;
-const password=form.password.value;
-const image=form.image.files[0]
-console.log({name,email,password,image});
-createUser(email,password)
-.then(res=>{
-    navigate('/')
-})
-    }
+  const { createUser, setUser, updateUserProfile } = useAuth();
+  const navigate = useNavigate();
+  const handleSignup = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    const image = form.image.files[0];
+    const photoURL = await imageUpload(image);
+
+    console.log({ name, email, password, photoURL });
+    createUser(email, password)
+    .then((data) => {
+      updateUserProfile(name, photoURL);
+      setUser(data);
+      navigate("/");
+    });
+  };
   return (
     <div className="hero bg-base-200 min-h-screen">
       <div className="hero-content flex-col lg:flex-row-reverse">
@@ -35,7 +40,7 @@ createUser(email,password)
                 <span className="label-text">Name</span>
               </label>
               <input
-              name="name"
+                name="name"
                 type="text"
                 placeholder="name"
                 className="input input-bordered"
@@ -47,8 +52,7 @@ createUser(email,password)
                 <span className="label-text">Upload Photo</span>
               </label>
               <input
-               className="file-input w-full max-w-xs"
-                required
+                className="file-input w-full max-w-xs"
                 type="file"
                 name="image"
                 accept="image/*"
@@ -59,7 +63,7 @@ createUser(email,password)
                 <span className="label-text">Email</span>
               </label>
               <input
-              name="email"
+                name="email"
                 type="email"
                 placeholder="email"
                 className="input input-bordered"
@@ -71,7 +75,7 @@ createUser(email,password)
                 <span className="label-text">Password</span>
               </label>
               <input
-              name="password"
+                name="password"
                 type="password"
                 placeholder="password"
                 className="input input-bordered"
@@ -79,7 +83,9 @@ createUser(email,password)
               />
             </div>
             <div className="form-control mt-6">
-              <button className="btn bg-[#58a6af] text-white rounded-none">Signup</button>
+              <button className="btn bg-[#58a6af] text-white rounded-none">
+                Signup
+              </button>
             </div>
           </form>
         </div>

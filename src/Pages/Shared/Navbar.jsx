@@ -1,12 +1,13 @@
-import { Avatar, Button } from "@mui/material";
+import {  Button } from "@mui/material";
 import { Link } from 'react-router-dom';
 import useAuth from "../../Hooks/useAuth";
+import logo from '../../assets/icons8-study-48.png'
 
 
 
 const Navbar = () => {
   const {user,signOutUser}=useAuth();
-
+  
 console.log(user);
     const navbarLink=<>
   <li><a>Dashboard</a></li>
@@ -37,7 +38,7 @@ console.log(user);
       
       </ul>
     </div>
-    <a className="btn btn-ghost text-xl">EduLink</a>
+    <Link to='/' className="btn btn-ghost text-xl"><img src={logo} alt="" /> EduLink</Link>
   </div>
   <div className="navbar-center hidden lg:flex">
     <ul className="menu menu-horizontal px-1 *:font-bold">
@@ -49,7 +50,11 @@ console.log(user);
 {
   user ? <>
    <Button onClick={signOutUser} className="!bg-[#58a6af]" variant="contained">Sign Out</Button>
-   <Avatar alt="Remy Sharp" src={user?.photoURL} />
+   <div className="avatar">
+  <div className="ring-[#58a6af] ring-offset-base-100 w-12 rounded-full ring ring-offset-2">
+    <img referrerPolicy="no-referrer" src={user?.photoURL} />
+  </div>
+</div>
   </>:<>
   <Button className="!bg-[#58a6af]" variant="contained"><Link to='signin'>Sign in</Link></Button>
   <Button className="!bg-[#58a6af]" variant="contained"><Link to='signup'>Sign up</Link></Button></>
