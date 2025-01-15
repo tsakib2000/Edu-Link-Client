@@ -1,6 +1,7 @@
 import toast from "react-hot-toast";
 import useAuth from "../../Hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import GoogleLogin from "../../Components/SocialLogin/googleLogin";
 
 
 const Signin = () => {
@@ -64,6 +65,8 @@ const navigate=useNavigate();
                   Signin
                 </button>
               </div>
+              <div className="divider">OR</div>
+              <GoogleLogin/>
             </form>
           </div>
         </div>

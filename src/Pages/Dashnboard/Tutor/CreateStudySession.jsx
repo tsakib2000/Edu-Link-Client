@@ -1,0 +1,184 @@
+import { useState } from "react";
+import { imageUpload } from "../../../Api/utils";
+import useAuth from "../../../Hooks/useAuth";
+import { format, set } from "date-fns";
+const CreateStudySession = () => {
+  const [loading,setLoading]=useState(false)
+    const {user}=useAuth();
+const today=format(new Date(), "yyyy-MM-dd")
+    const handleSubmit=async e=>{
+        e.preventDefault();
+    setLoading(true)
+        const formData = new FormData(e.target);
+        const data = Object.fromEntries(formData.entries());
+        const {image,...newData}=data;
+        const photoURL=await imageUpload(image)
+        
+        newData.sessionPhoto=photoURL
+        console.log(newData);
+    }
+  return (
+    <div className="max-w-3xl mx-auto p-8 bg-white shadow-lg rounded-lg mt-10">
+      <h2 className="text-2xl font-semibold text-center mb-6 uppercase">
+        Create Study Session
+      </h2>
+      <form onSubmit={handleSubmit} className="space-y-5">
+        {/* Session Title */}
+        <div>
+          <label className="block font-medium">Session Title</label>
+          <input
+            type="text"
+            name="title"
+            required
+            placeholder="Enter session title"
+            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+          />
+        </div>
+
+        {/* Tutor Name */}
+        <div>
+          <label className="block font-medium">Tutor Name</label>
+          <input
+          value={user?.displayName}
+            type="text"
+            readOnly
+            className="w-full px-4 py-2 border bg-gray-100 rounded-md cursor-not-allowed"
+          />
+        </div>
+
+        {/* Tutor Email */}
+        <div>
+          <label className="block font-medium">Tutor Email</label>
+          <input
+          value={user?.email}
+            type="email"
+            readOnly
+            className="w-full px-4 py-2 border bg-gray-100 rounded-md cursor-not-allowed"
+          />
+        </div>
+
+        {/* Session Description */}
+        <div>
+          <label className="block font-medium">Session Description</label>
+          <textarea
+            name="description"
+            required
+            placeholder="Enter session description"
+            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+          ></textarea>
+        </div>
+
+        {/* Registration Start Date */}
+        <div>
+          <label className="block font-medium">Registration Start Date</label>
+          <input
+          defaultValue={today}
+            type="date"
+            name="registrationStart"
+            min={today}
+            required
+            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+          />
+        </div>
+
+        {/* Registration End Date */}
+        <div>
+          <label className="block font-medium">Registration End Date</label>
+          <input
+          min={today}
+            type="date"
+            name="registrationEnd"
+            required
+            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+          />
+        </div>
+
+        {/* Class Start Date */}
+        <div>
+          <label className="block font-medium">Class Start Date</label>
+          <input
+          defaultValue={today}
+          min={today}
+            type="date"
+            name="classStart"
+            required
+            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+          />
+        </div>
+
+        {/* Class End Date */}
+        <div>
+          <label className="block font-medium">Class End Date</label>
+          <input
+          min={today}
+            type="date"
+            name="classEnd"
+            required
+            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+          />
+        </div>
+
+        {/* Session Duration */}
+        <div>
+          <label className="block font-medium">
+            Session Duration (in weeks)
+          </label>
+          <input
+            type="number"
+            name="sessionDuration"
+            required
+            min="1"
+            placeholder="Enter session duration"
+            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+          />
+        </div>
+        <div >
+              <label className="label">
+                <span className="label-text">Upload Session Photo</span>
+              </label>
+              <input
+                className="file-input w-full max-w-xs"
+                type="file"
+                name="image"
+                accept="image/*"
+              />
+            </div>
+        {/* Registration Fee */}
+        <div>
+          <label className="block font-medium">Registration Fee</label>
+          <input
+          name="fee"
+          value={0}
+            type="number"
+            readOnly
+            className="w-full px-4 py-2 border bg-gray-100 rounded-md cursor-not-allowed"
+          />
+        </div>
+
+        {/* Status */}
+        <div>
+          <label className="block font-medium">Status</label>
+          <input
+          value='pending'
+          name="status"
+            type="text"
+            readOnly
+            className="w-full px-4 py-2 border bg-gray-100 rounded-md cursor-not-allowed"
+          />
+        </div>
+
+        {/* Submit Button */}
+        <div>
+          <button
+            type="submit"
+            className="w-full bg-[#58a6af] text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300"
+          >
+            Create Session
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+};
+
+export default CreateStudySession;

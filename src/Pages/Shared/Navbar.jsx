@@ -32,7 +32,7 @@ console.log(user);
       </div>
       <ul
         tabIndex={0}
-        className=" bg-[#58a6af] *:font-bold menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+        className="  *:text-[#58a6af] *:font-bold menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
       {navbarLink}
      
       

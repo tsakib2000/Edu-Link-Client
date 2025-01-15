@@ -19,7 +19,7 @@ const Signup = () => {
     const password = form.password.value;
     const image = form.image.files[0];
     const role= form.role.value;
-    // return console.log({ name, email, password,role});
+  
     const photoURL = await imageUpload(image);
 
     
@@ -87,7 +87,7 @@ console.log(users);
                 </option>
                 <option value='student'>Student</option>
                 <option value='tutor'>Tutor</option>
-                <option value='admin'>Admin</option>
+                
                 
               </select>
             </div>

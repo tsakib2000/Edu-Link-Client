@@ -1,7 +1,9 @@
 import {
   createUserWithEmailAndPassword,
+  GoogleAuthProvider,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signOut,
   updateProfile,
 } from "firebase/auth";
@@ -14,6 +16,7 @@ import useAxiosPublic from './../Hooks/useAxiosPublic';
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const AuthContext = createContext(null);
+ const googleProvider = new GoogleAuthProvider();
 const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [user,setUser]=useState(null)
@@ -30,6 +33,11 @@ const signInUser=(email,password)=>{
   setLoading(true);
   return signInWithEmailAndPassword(auth,email,password)
 }
+
+const googleSignIn=()=>{
+  setLoading(true)
+  return signInWithPopup(auth,googleProvider);
+}
 const updateUserProfile=(name,photo)=>{
   return updateProfile(auth.currentUser,{displayName:name,photoURL:photo})
 }
@@ -42,9 +50,11 @@ const updateUserProfile=(name,photo)=>{
           .then(res=>{
             if(res.data.token)
               localStorage.setItem('access_token',res.data.token)
+            setLoading(false)
           })
         }else{
 localStorage.removeItem('access_token')
+setLoading(false)
         }
         setLoading(false)
     });
@@ -62,7 +72,8 @@ localStorage.removeItem('access_token')
     signOutUser,
     setUser,
     updateUserProfile,
-    signInUser
+    signInUser,
+    googleSignIn
   };
   return (
     <AuthContext.Provider value={authInfo}>
