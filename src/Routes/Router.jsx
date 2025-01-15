@@ -7,6 +7,8 @@ import Dashboard from "../Layout/Dashboard/Dashboard";
 import PrivateRoutes from "../Private/PrivateRoutes";
 import CreateStudySession from "../Pages/Dashnboard/Tutor/CreateStudySession";
 import AllStudySessions from "../Pages/Dashnboard/Tutor/AllStudySessions";
+import ViewAllUser from "../Pages/Dashnboard/Admin/ViewAllUser";
+import AllSessions from "../Pages/Dashnboard/Admin/AllSessions";
 
 
 const router =createBrowserRouter([
@@ -24,6 +26,14 @@ const router =createBrowserRouter([
         path:'dashboard',
         element:<PrivateRoutes><Dashboard/></PrivateRoutes>,
         children:[
+            {
+                path:'viewAllUser',
+                element:<ViewAllUser/>
+            },
+            {
+                path:'AllSession',
+                element:<AllSessions/>
+            },
             {
                 path:'createStudySession',
                 element:<CreateStudySession/>
