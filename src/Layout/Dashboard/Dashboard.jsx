@@ -42,7 +42,7 @@ const {role,name}=users;
                {
              role === "tutor" &&    <ul className="menu p-8 space-y-4 *:text-white *:font-semibold ">
                  <li><NavLink to='/dashboard/createStudySession'>Create study session</NavLink></li>
-                 <li><NavLink to='/dashboard/createNote'>View all study sessions </NavLink></li>
+                 <li><NavLink to='/dashboard/studySession'>View all study sessions </NavLink></li>
                  <li><NavLink to='/dashboard/manageNotes'>Upload materials</NavLink></li>
                  <li><NavLink to='/dashboard/ViewMaterial'>View all materials</NavLink></li>
                  </ul>

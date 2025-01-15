@@ -6,6 +6,7 @@ import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import toast from "react-hot-toast";
 import { FaSpinner } from "react-icons/fa";
 import Swal from "sweetalert2";
+import './session.css'
 const CreateStudySession = () => {
   const [loading,setLoading]=useState(false)
   const axiosSecure=useAxiosSecure();
@@ -21,7 +22,9 @@ const today=format(new Date(), "yyyy-MM-dd")
         const photoURL=await imageUpload(image)
         
         newData.sessionPhoto=photoURL
-        console.log(newData);
+        newData.tutorEmail=user?.email;
+        newData.tutorName=user?.displayName;
+ 
         try{
           await axiosSecure.post('/sessions',newData)
           Swal.fire({
@@ -45,11 +48,11 @@ const today=format(new Date(), "yyyy-MM-dd")
         }
     }
   return (
-    <div className="max-w-3xl mx-auto p-8 bg-white shadow-lg rounded-lg mt-10">
+    <div className=" lg:w-full mx-auto p-8 bg-white  rounded-lg mt-10">
       <h2 className="text-2xl font-semibold text-center mb-6 uppercase">
         Create Study Session
       </h2>
-      <form onSubmit={handleSubmit} className="space-y-5">
+      <form  onSubmit={handleSubmit} className="grid grid-cols-2 lg:grid-cols-4 gap-4  ">
         {/* Session Title */}
         <div>
           <label className="block font-medium">Session Title</label>
@@ -58,7 +61,7 @@ const today=format(new Date(), "yyyy-MM-dd")
             name="title"
             required
             placeholder="Enter session title"
-            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className="w-full border  px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
         </div>
 
@@ -148,7 +151,7 @@ const today=format(new Date(), "yyyy-MM-dd")
         {/* Session Duration */}
         <div>
           <label className="block font-medium">
-            Session Duration (in weeks)
+            Session Duration (in hour)
           </label>
           <input
             type="number"
@@ -198,7 +201,7 @@ const today=format(new Date(), "yyyy-MM-dd")
         <div>
           <button
             type="submit"
-            className="w-full uppercase bg-[#58a6af] flex justify-center text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300"
+            className="w-full uppercase bg-[#58a6af] flex justify-center text-white py-2 px-4 rounded-md hover:bg-[#a4d1d7] transition duration-300"
           >
         
        {
