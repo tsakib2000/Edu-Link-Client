@@ -1,13 +1,19 @@
 import { useState } from "react";
 import { imageUpload } from "../../../Api/utils";
 import useAuth from "../../../Hooks/useAuth";
-import { format, set } from "date-fns";
+import { format} from "date-fns";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import toast from "react-hot-toast";
+import { FaSpinner } from "react-icons/fa";
+import Swal from "sweetalert2";
 const CreateStudySession = () => {
   const [loading,setLoading]=useState(false)
+  const axiosSecure=useAxiosSecure();
     const {user}=useAuth();
 const today=format(new Date(), "yyyy-MM-dd")
     const handleSubmit=async e=>{
         e.preventDefault();
+        const form=e.target
     setLoading(true)
         const formData = new FormData(e.target);
         const data = Object.fromEntries(formData.entries());
@@ -16,6 +22,27 @@ const today=format(new Date(), "yyyy-MM-dd")
         
         newData.sessionPhoto=photoURL
         console.log(newData);
+        try{
+          await axiosSecure.post('/sessions',newData)
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Your session created successfully",
+            text:'Wait for Admin Approval',
+            background:'#58a6af',
+            customClass:{
+              text:'text-white',
+              title:'text-white font-bold'
+            },
+            showConfirmButton: false,
+            timer: 2000
+          });
+          form.reset()
+        }catch(err){
+          toast.error(err.message)
+        }finally{
+          setLoading(false)
+        }
     }
   return (
     <div className="max-w-3xl mx-auto p-8 bg-white shadow-lg rounded-lg mt-10">
@@ -171,9 +198,13 @@ const today=format(new Date(), "yyyy-MM-dd")
         <div>
           <button
             type="submit"
-            className="w-full bg-[#58a6af] text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300"
+            className="w-full uppercase bg-[#58a6af] flex justify-center text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300"
           >
-            Create Session
+        
+       {
+        loading?<FaSpinner className="animate-spin text-center" />:'create session'
+       }
+      
           </button>
         </div>
       </form>
