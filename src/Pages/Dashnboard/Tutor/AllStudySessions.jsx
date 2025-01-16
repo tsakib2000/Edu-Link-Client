@@ -7,7 +7,7 @@ import SessionCard from "../../../Components/Dashboard/Tutor/sessionCard";
 const AllStudySessions = () => {
     const {user}=useAuth()
     const axiosSecure= useAxiosSecure();
-const {data:sessions=[]}=useQuery({
+const {data:sessions=[],refetch}=useQuery({
     queryKey:['sessions',user?.email],
     enabled:!!user?.email,
     queryFn:async()=>{
@@ -25,7 +25,7 @@ console.log(sessions);
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 p-8">
             {
-                sessions.map(session=><SessionCard session={session} key={session._id}/>)
+                sessions.map(session=><SessionCard refetch={refetch} session={session} key={session._id}/>)
             }
         </div>
         </div>

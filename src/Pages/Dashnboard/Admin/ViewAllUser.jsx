@@ -33,7 +33,7 @@ const ViewAllUser = () => {
           <tbody className="text-gray-600 text-sm">
             {users.map((user, index) => (
               <tr
-                key={user.id}
+                key={index}
                 className="border-b border-gray-200 hover:bg-gray-100"
               >
                 <td className="py-3 px-6 text-left">{index + 1}</td>
