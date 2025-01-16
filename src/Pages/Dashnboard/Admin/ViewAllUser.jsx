@@ -9,6 +9,7 @@ const ViewAllUser = () => {
       const { data } = await axiosSecure.get("/users");
       return data;
     },
+
   });
 
   return (

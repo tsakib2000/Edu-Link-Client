@@ -9,6 +9,8 @@ import CreateStudySession from "../Pages/Dashnboard/Tutor/CreateStudySession";
 import AllStudySessions from "../Pages/Dashnboard/Tutor/AllStudySessions";
 import ViewAllUser from "../Pages/Dashnboard/Admin/ViewAllUser";
 import AllSessions from "../Pages/Dashnboard/Admin/AllSessions";
+import Error from "../Pages/Error";
+import UploadMaterials from "../Pages/Dashnboard/Tutor/UploadMaterials";
 
 
 const router =createBrowserRouter([
@@ -41,6 +43,10 @@ const router =createBrowserRouter([
             {
                 path:'studySession',
                 element:<AllStudySessions/>
+            },
+            {
+                path:'uploadMaterials',
+                element:<UploadMaterials/>
             }
         ]
     },
@@ -51,6 +57,10 @@ const router =createBrowserRouter([
     {
         path:'signin',
         element:<Signin/>
+    },
+    {
+        path:'*',
+        element:<Error/>
     }
 ])
 

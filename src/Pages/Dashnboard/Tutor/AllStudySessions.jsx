@@ -16,7 +16,7 @@ const {data:sessions=[],refetch}=useQuery({
     }
 })
 
-console.log(sessions);
+
     return (
         <div>
            <div className="flex justify-center items-center">

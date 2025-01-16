@@ -3,7 +3,7 @@ import { TiDeleteOutline } from "react-icons/ti";
 import { FcApproval } from "react-icons/fc";
 
 const SessionTable = ({session,handleApprove,handleReject}) => {
-    const {_id,title,sessionPhoto,}=session
+    const {_id,title,sessionPhoto,status}=session
 
     return (
         <>
@@ -25,7 +25,7 @@ const SessionTable = ({session,handleApprove,handleReject}) => {
                 </td>
                 <td>Purple</td>
                 <th>
-                  <button className="btn btn-ghost btn-xs">details</button>
+                {status}
                 </th>
                 <th className="flex *:text-2xl">
                   <button onClick={()=>handleApprove(_id)} className="btn btn-ghost "><FcApproval /></button>

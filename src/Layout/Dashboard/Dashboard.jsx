@@ -6,7 +6,7 @@ import LoadingSpinner from "../../Components/LoadingSpinner";
 
 
 const Dashboard = () => {
-    const {user}=useAuth();
+    const {user,signOutUser}=useAuth();
     const axiosSecure=useAxiosSecure();
 const {data:users={},isLoading}=useQuery({
     queryKey:['users',user?.email],
@@ -43,7 +43,7 @@ const {role,name}=users;
              role === "tutor" &&    <ul className="menu p-8 space-y-4 *:text-white *:font-semibold ">
                  <li><NavLink to='/dashboard/createStudySession'>Create study session</NavLink></li>
                  <li><NavLink to='/dashboard/studySession'>View all study sessions </NavLink></li>
-                 <li><NavLink to='/dashboard/manageNotes'>Upload materials</NavLink></li>
+                 <li><NavLink to='/dashboard/uploadMaterials'>Upload materials</NavLink></li>
                  <li><NavLink to='/dashboard/ViewMaterial'>View all materials</NavLink></li>
                  </ul>
                }
@@ -57,6 +57,7 @@ const {role,name}=users;
            <div>
             <ul className="menu p-8 space-y-4 *:text-white *:font-semibold ">
                 <li ><Link to='/' className="text-center">Home</Link></li>
+                <li><button onClick={signOutUser}>Sign Out</button></li>
             </ul>
            </div>
             </div>
