@@ -30,23 +30,23 @@ const router =createBrowserRouter([
         children:[
             {
                 path:'viewAllUser',
-                element:<ViewAllUser/>
+                element:<PrivateRoutes><ViewAllUser/></PrivateRoutes>
             },
             {
                 path:'AllSession',
-                element:<AllSessions/>
+                element:<PrivateRoutes><AllSessions/></PrivateRoutes>
             },
             {
                 path:'createStudySession',
-                element:<CreateStudySession/>
+                element:<PrivateRoutes><CreateStudySession/></PrivateRoutes>
             },
             {
                 path:'studySession',
-                element:<AllStudySessions/>
+                element:<PrivateRoutes><AllStudySessions/></PrivateRoutes>
             },
             {
                 path:'uploadMaterials',
-                element:<UploadMaterials/>
+                element:<PrivateRoutes><UploadMaterials/></PrivateRoutes>
             }
         ]
     },

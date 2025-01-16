@@ -1,4 +1,4 @@
-import { Link, NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
 import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useAuth from "../../Hooks/useAuth";
@@ -7,6 +7,7 @@ import LoadingSpinner from "../../Components/LoadingSpinner";
 
 const Dashboard = () => {
     const {user,signOutUser}=useAuth();
+    const navigate=useNavigate()
     const axiosSecure=useAxiosSecure();
 const {data:users={},isLoading}=useQuery({
     queryKey:['users',user?.email],
@@ -19,6 +20,12 @@ const {data:users={},isLoading}=useQuery({
 })
 if(isLoading)return <LoadingSpinner/>
 const {role,name}=users;
+const handleSignOut=()=>{
+    signOutUser()
+    .then(()=>{
+navigate('/')
+    })
+}
     return (
      <>
      
@@ -57,7 +64,7 @@ const {role,name}=users;
            <div>
             <ul className="menu p-8 space-y-4 *:text-white *:font-semibold ">
                 <li ><Link to='/' className="text-center">Home</Link></li>
-                <li><button onClick={signOutUser}>Sign Out</button></li>
+                <li><button onClick={handleSignOut}>Sign Out</button></li>
             </ul>
            </div>
             </div>
