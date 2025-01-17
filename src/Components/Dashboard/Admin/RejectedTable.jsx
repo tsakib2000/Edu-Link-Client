@@ -2,7 +2,7 @@
 
 
 const RejectedTable = ({session}) => {
-    const {title,sessionPhoto,}=session
+    const {title,sessionPhoto,tutorEmail,status}=session
     return (
         <tr className="hover">
         <td>
@@ -20,13 +20,11 @@ const RejectedTable = ({session}) => {
         <td>
          {title}
         </td>
-        <td>Purple</td>
+        <td>{tutorEmail}</td>
         <th>
-          <button className="btn btn-ghost btn-xs">details</button>
+       <span className="bg-red-300 p-1 rounded-lg font-normal">  {status}</span>
         </th>
-        <th className="flex *:text-2xl">
-
-        </th>
+    
       </tr>
     );
 };

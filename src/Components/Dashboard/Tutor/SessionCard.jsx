@@ -96,9 +96,12 @@ const SessionCard = ({ session,refetch }) => {
               Admin Feedback:
               <span className=" text-red-500 "> {session?.feedback}</span>
             </p>
-            <button onClick={handleRePost} className="btn btn-sm">re-post</button>
+            
           </>
         )}
+        {
+          session?.status=='rejected'&& <button onClick={handleRePost} className="btn btn-sm">re-post</button>
+        }
       </div>
     </div>
   );

@@ -13,6 +13,7 @@ import Error from "../Pages/Error";
 import UploadMaterials from "../Pages/Dashnboard/Tutor/UploadMaterials";
 import DashboardHome from "../Pages/Dashnboard/DashboardHome";
 import ViewTutorMaterials from "../Pages/Dashnboard/Tutor/ViewTutorMaterials";
+import AllMaterials from "../Pages/Dashnboard/Admin/AllMaterials";
 
 
 const router =createBrowserRouter([
@@ -41,6 +42,9 @@ const router =createBrowserRouter([
             {
                 path:'AllSession',
                 element:<PrivateRoutes><AllSessions/></PrivateRoutes>
+            },{
+                path:'viewAllMaterials',
+                element:<PrivateRoutes><AllMaterials/></PrivateRoutes>
             },
             {
                 path:'createStudySession',

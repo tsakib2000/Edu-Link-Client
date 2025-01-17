@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 
 
-const ApprovedTable = ({session}) => {
-    const {title,sessionPhoto,}=session
+const ApprovedTable = ({session,handleUpdate,handleDelete}) => {
+    const {_id,title,sessionPhoto,status}=session
     return (
         <tr className="hover">
                 <td>
@@ -20,12 +20,11 @@ const ApprovedTable = ({session}) => {
                 <td>
                  {title}
                 </td>
-                <td>Purple</td>
-                <th>
-                  <button className="btn btn-ghost btn-xs">details</button>
-                </th>
-                <th className="flex *:text-2xl">
-     
+                <td className=""><span className="bg-green-300  p-1 rounded-md">{status}</span></td>
+            
+                <th className="flex flex-col gap-4">
+                  <button onClick={()=>handleUpdate(_id)} className="btn btn-sm bg-blue-400 text-white"> update</button>
+                  <button onClick={()=>handleDelete(_id)} className="btn btn-sm bg-red-400 text-white"> update</button>
                 </th>
               </tr>
     );

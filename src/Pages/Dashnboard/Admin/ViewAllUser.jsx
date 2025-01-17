@@ -1,23 +1,64 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import toast from "react-hot-toast";
+import Swal from "sweetalert2";
+import { useState } from "react";
 
 const ViewAllUser = () => {
+  const [search, setSearch] = useState('');
   const axiosSecure = useAxiosSecure();
-  const { data: users = [] } = useQuery({
-    queryKey: ["users"],
+  const { data: users = [], refetch } = useQuery({
+    queryKey: ["users",search],
     queryFn: async () => {
-      const { data } = await axiosSecure.get("/users");
+      const { data } = await axiosSecure.get(`/users?search=${search}`);
       return data;
     },
-
   });
 
+  const handleUpdateRole = async (id) => {
+    const role = "admin";
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await axiosSecure.patch(`/user/${id}`, { role });
+          Swal.fire({
+            title: "Updated!",
+            text: "User role update Successfully",
+            icon: "success",
+          });
+          refetch();
+        } catch (err) {
+          toast.error(err.message);
+        }
+      }
+    });
+  };
   return (
     <div className="p-8">
       <div className="flex justify-center items-center">
+        
+      <div className="flex flex-col mb-5">
+        
         <h1 className="text-2xl md:text-4xl font-bold pb-3 text-[#58a6af] border-b-2 inline text-center my-5">
-        All USERS
+          All USERS
         </h1>
+
+          <input
+            onChange={(e) => setSearch(e.target.value)}
+            className="input input-bordered input-md w-full max-w-xs"
+            type="text"
+            name="search"  
+            placeholder={`🔍 Search by email`}
+          />
+        </div>
       </div>
       <div className="overflow-x-auto">
         <table className="min-w-full bg-white  rounded-lg shadow-lg">
@@ -40,6 +81,7 @@ const ViewAllUser = () => {
                 <td className="py-3 px-6 text-left">{index + 1}</td>
                 <td className="py-3 px-6 text-left">
                   <img
+                    referrerPolicy="no-referrer"
                     src={user.photoURL}
                     alt={user.name}
                     className="w-10 h-10 object-cover rounded-full"
@@ -61,7 +103,10 @@ const ViewAllUser = () => {
                   </span>
                 </td>
                 <td className="py-3 px-6 text-center">
-                  <button className="bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600 transition">
+                  <button
+                    onClick={() => handleUpdateRole(user?._id)}
+                    className="bg-blue-400 text-white px-3 py-1 rounded-md font-bold hover:bg-blue-600 transition"
+                  >
                     update
                   </button>
                 </td>

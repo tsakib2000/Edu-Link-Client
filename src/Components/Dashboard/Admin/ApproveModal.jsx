@@ -6,7 +6,7 @@ import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 const ApproveModal = ({session,refetch}) => {
     const {_id,title,fee}=session
-    console.log(session);
+ 
     const axiosSecure=useAxiosSecure()
    const approveSession=async e=>{
 e.preventDefault()

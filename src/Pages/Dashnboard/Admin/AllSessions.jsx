@@ -6,6 +6,9 @@ import { useState } from "react";
 import ApprovedTable from "../../../Components/Dashboard/Admin/ApprovedTable";
 import RejectModal from "../../../Components/Dashboard/Admin/RejectModal";
 import RejectedTable from "../../../Components/Dashboard/Admin/RejectedTable";
+import UpdateSessionModal from "../../../Components/Dashboard/Admin/UpdateSessionModal";
+import Swal from "sweetalert2";
+import toast from "react-hot-toast";
 
 const AllSessions = () => {
   const [sessionId, setSessionId] = useState(null);
@@ -30,6 +33,11 @@ const AllSessions = () => {
     setSessionId(id);
     document.getElementById("reject_Modal").showModal();
   };
+
+  const handleUpdate = (id) => {
+    setSessionId(id);
+    document.getElementById("update_Modal").showModal();
+  };
   const { data: session = {} } = useQuery({
     queryKey: ["session", sessionId],
     queryFn: async () => {
@@ -39,6 +47,35 @@ const AllSessions = () => {
     enabled: !!sessionId,
   });
 
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then(async(result) => {
+
+if (result.isConfirmed) {
+try{
+  await axiosSecure.delete(`/session/${id}`)
+  
+  Swal.fire({
+    title: "Deleted!",
+    text: "Session has been deleted.",
+    icon: "success"
+  });
+  refetch()
+}catch(err){
+  toast.error(err.message)
+}
+}
+
+   
+    });
+  };
   return (
     <>
       <div className="p-8 ">
@@ -47,33 +84,35 @@ const AllSessions = () => {
           <h2 className="text-2xl font-bold text-yellow-600 mb-4">
             Pending Sessions
           </h2>
-         {
-          pending.length <= 0? 'NO PENDING SESSION HERE' : <div className="overflow-x-auto">
-          <table className="table">
-            {/* head */}
-            <thead>
-              <tr className="uppercase">
-                <th>image</th>
-                <th>Title</th>
-                <th>Job</th>
-                <th>Status</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {/* row 1 */}
-              {pending.map((session) => (
-                <SessionTable
-                  handleReject={handleReject}
-                  handleApprove={handleApprove}
-                  session={session}
-                  key={session._id}
-                />
-              ))}
-            </tbody>
-          </table>
-        </div>
-         }
+          {pending.length <= 0 ? (
+            "NO PENDING SESSION HERE"
+          ) : (
+            <div className="overflow-x-auto">
+              <table className="table">
+                {/* head */}
+                <thead>
+                  <tr className="uppercase">
+                    <th>image</th>
+                    <th>Title</th>
+                    <th>Tutor Email</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {/* row 1 */}
+                  {pending.map((session) => (
+                    <SessionTable
+                      handleReject={handleReject}
+                      handleApprove={handleApprove}
+                      session={session}
+                      key={session._id}
+                    />
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
         </section>
 
         {/* Approved Sessions */}
@@ -84,19 +123,24 @@ const AllSessions = () => {
           <div className="overflow-x-auto">
             <table className="table">
               {/* head */}
-              <thead>
+              <thead className="uppercase">
                 <tr>
                   <th>image</th>
                   <th>Title</th>
                   <th>Job</th>
-                  <th>Favorite Color</th>
+
                   <th>Action</th>
                 </tr>
               </thead>
               <tbody>
                 {/* row 1 */}
                 {approved.map((session) => (
-                  <ApprovedTable session={session} key={session._id} />
+                  <ApprovedTable
+                    handleDelete={handleDelete}
+                    handleUpdate={handleUpdate}
+                    session={session}
+                    key={session._id}
+                  />
                 ))}
               </tbody>
             </table>
@@ -114,12 +158,11 @@ const AllSessions = () => {
             <div className="overflow-x-auto">
               <table className="table">
                 {/* head */}
-                <thead>
+                <thead className="uppercase">
                   <tr>
                     <th>image</th>
                     <th>Title</th>
-                    <th>Job</th>
-                    <th>Favorite Color</th>
+                    <th>tutor email</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -134,6 +177,7 @@ const AllSessions = () => {
           )}
         </section>
       </div>
+      <UpdateSessionModal session={session} refetch={refetch} />
       <RejectModal session={session} refetch={refetch} />
       <ApproveModal refetch={refetch} session={session} />
     </>

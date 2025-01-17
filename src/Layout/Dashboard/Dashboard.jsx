@@ -57,7 +57,7 @@ navigate('/')
           {   role === 'admin' && <ul className="menu p-8 space-y-4 *:text-white *:font-semibold ">
                  <li><NavLink to='/dashboard/viewAllUser'>View all users</NavLink></li>
                  <li><NavLink to='/dashboard/AllSession'>View all study session </NavLink></li>
-                 <li><NavLink to='/dashboard/manageNotes'>View all materials</NavLink></li>
+                 <li><NavLink to='/dashboard/viewAllMaterials'>View all materials</NavLink></li>
                  </ul>
                }
             </div>
@@ -68,7 +68,7 @@ navigate('/')
             </ul>
            </div>
             </div>
-            <div className="grid-cols-8 w-full">
+            <div className="grid-cols-8 w-full bg-[#f8fbfb]">
                 <Outlet/>
             </div>
         </div>

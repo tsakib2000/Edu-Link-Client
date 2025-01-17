@@ -3,7 +3,7 @@ import { TiDeleteOutline } from "react-icons/ti";
 import { FcApproval } from "react-icons/fc";
 
 const SessionTable = ({session,handleApprove,handleReject}) => {
-    const {_id,title,sessionPhoto,status}=session
+    const {_id,title,sessionPhoto,status,tutorEmail}=session
 
     return (
         <>
@@ -23,7 +23,7 @@ const SessionTable = ({session,handleApprove,handleReject}) => {
                 <td>
                  {title}
                 </td>
-                <td>Purple</td>
+                <td>{tutorEmail}</td>
                 <th>
                 {status}
                 </th>
