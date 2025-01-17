@@ -2,6 +2,7 @@ import toast from "react-hot-toast";
 import useAuth from "../../Hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import GoogleLogin from "../../Components/SocialLogin/googleLogin";
+import GithubLogin from "../../Components/SocialLogin/GithubLogin";
 
 
 const Signin = () => {
@@ -67,6 +68,8 @@ const navigate=useNavigate();
               </div>
               <div className="divider">OR</div>
               <GoogleLogin/>
+              
+              <GithubLogin/>
             </form>
           </div>
         </div>

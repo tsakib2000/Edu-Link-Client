@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 import GoogleLogin from "../../Components/SocialLogin/googleLogin";
+import GithubLogin from "../../Components/SocialLogin/GithubLogin";
 
 
 const Signup = () => {
@@ -122,6 +123,7 @@ console.log(users);
             </div>
             <div className="divider">OR</div>
           <GoogleLogin/>
+          <GithubLogin/>
           </form>
         </div>
       </div>
