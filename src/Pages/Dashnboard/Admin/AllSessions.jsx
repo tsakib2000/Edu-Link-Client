@@ -47,31 +47,33 @@ const AllSessions = () => {
           <h2 className="text-2xl font-bold text-yellow-600 mb-4">
             Pending Sessions
           </h2>
-          <div className="overflow-x-auto">
-            <table className="table">
-              {/* head */}
-              <thead>
-                <tr className="uppercase">
-                  <th>image</th>
-                  <th>Title</th>
-                  <th>Job</th>
-                  <th>Status</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {/* row 1 */}
-                {pending.map((session) => (
-                  <SessionTable
-                    handleReject={handleReject}
-                    handleApprove={handleApprove}
-                    session={session}
-                    key={session._id}
-                  />
-                ))}
-              </tbody>
-            </table>
-          </div>
+         {
+          pending.length <= 0? 'NO PENDING SESSION HERE' : <div className="overflow-x-auto">
+          <table className="table">
+            {/* head */}
+            <thead>
+              <tr className="uppercase">
+                <th>image</th>
+                <th>Title</th>
+                <th>Job</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {/* row 1 */}
+              {pending.map((session) => (
+                <SessionTable
+                  handleReject={handleReject}
+                  handleApprove={handleApprove}
+                  session={session}
+                  key={session._id}
+                />
+              ))}
+            </tbody>
+          </table>
+        </div>
+         }
         </section>
 
         {/* Approved Sessions */}

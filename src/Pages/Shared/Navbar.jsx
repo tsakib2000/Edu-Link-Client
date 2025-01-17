@@ -1,38 +1,13 @@
-import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import logo from "../../assets/icons8-study-48.png";
-
-import { useQuery } from "@tanstack/react-query";
-
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
-
 const Navbar = () => {
   const { user, signOutUser } = useAuth();
 
-  const axiosPublic=useAxiosPublic();
-  const { data: users = {} } = useQuery({
-    queryKey: ["users", user?.email],
-    enabled: !!user?.email,
-    queryFn: async () => {
-      const { data } = await axiosPublic.get(`/users/${user?.email}`);
-
-      return data;
-    },
-  });
-
-  const { role } = users;
-  console.log(user);
   const navbarLink = (
     <>
       <li>
-        {role === "admin" ? (
-          <Link to="/dashboard/viewAllUser">Dashboard</Link>
-        ) : role === "tutor" ? (
-          <Link to="/dashboard/createStudySession">Dashboard</Link>
-        ) : (
-          <Link to='/dashboard'>Dashboard</Link>
-        )}
+      <Link to="/dashboard/dashboardHome">Dashboard</Link>
       </li>
     </>
   );
@@ -73,13 +48,12 @@ const Navbar = () => {
       <div className="navbar-end gap-4">
         {user ? (
           <>
-            <Button
+            <button
               onClick={signOutUser}
-              className="!bg-[#58a6af] !font-semibold"
-              variant="contained"
+              className="!font-semibold btn shadow-2xl border-none  !bg-[#f8fbfb]"
             >
               Sign Out
-            </Button>
+            </button>
             <div className="avatar">
               <div className="ring-[#58a6af] ring-offset-base-100 w-12 rounded-full ring ring-offset-2">
                 <img referrerPolicy="no-referrer" src={user?.photoURL} />
@@ -88,12 +62,12 @@ const Navbar = () => {
           </>
         ) : (
           <>
-            <Button className="!bg-[#58a6af]" variant="contained">
+            <button className=" btn shadow-2xl border-none  !bg-[#f8fbfb]">
               <Link to="signin">Sign in</Link>
-            </Button>
-            <Button className="!bg-[#58a6af]" variant="contained">
+            </button>
+            <button className="btn  shadow-2xl border-none !bg-[#f8fbfb]">
               <Link to="signup">Sign up</Link>
-            </Button>
+            </button>
           </>
         )}
       </div>

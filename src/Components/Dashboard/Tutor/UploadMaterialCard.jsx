@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 import { FaSpinner } from "react-icons/fa";
 
 const UploadMaterialCard = ({ user, session }) => {
-  const { _id, title } = session;
+  const { _id, title,tutorEmail } = session;
   const [loading, setLoading] = useState(false);
   const axiosSecure = useAxiosSecure();
 
@@ -21,6 +21,7 @@ const UploadMaterialCard = ({ user, session }) => {
     const material = {
       sessionTitle: title,
       sessionId: _id,
+      tutorEmail,
       driveLink,
       photoUrl,
     };

@@ -9,7 +9,7 @@ const UploadMaterials = () => {
   const { data: ApprovedSession = [] } = useQuery({
     queryKey: ["session"],
     queryFn: async () => {
-      const { data } = await axiosSecure("/session/approved");
+      const { data } = await axiosSecure(`/session/approved/${user?.email}`);
       return data;
     },
   });

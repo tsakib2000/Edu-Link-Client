@@ -23,7 +23,7 @@ const GoogleLogin = () => {
       navigate("/");
     })
     .catch((error) => {
-      const showError=(error.message.split('/')[1].slice(0,18));
+      const showError=(error.message);
       toast.error(showError)
     });
   }

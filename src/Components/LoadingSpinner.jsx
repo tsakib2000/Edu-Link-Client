@@ -4,7 +4,7 @@ import loading from '../assets/loading.json'
 const LoadingSpinner = () => {
     return (
         <div className='h-screen flex justify-center items-center'>
-            <Lottie animationData={loading}></Lottie>
+            <Lottie className="h-[400px]" animationData={loading}></Lottie>
         </div>
     );
 };

@@ -11,6 +11,8 @@ import ViewAllUser from "../Pages/Dashnboard/Admin/ViewAllUser";
 import AllSessions from "../Pages/Dashnboard/Admin/AllSessions";
 import Error from "../Pages/Error";
 import UploadMaterials from "../Pages/Dashnboard/Tutor/UploadMaterials";
+import DashboardHome from "../Pages/Dashnboard/DashboardHome";
+import ViewTutorMaterials from "../Pages/Dashnboard/Tutor/ViewTutorMaterials";
 
 
 const router =createBrowserRouter([
@@ -28,6 +30,10 @@ const router =createBrowserRouter([
         path:'dashboard',
         element:<PrivateRoutes><Dashboard/></PrivateRoutes>,
         children:[
+            {
+                path:'dashboardHome',
+                element:<PrivateRoutes><DashboardHome/></PrivateRoutes>
+            },
             {
                 path:'viewAllUser',
                 element:<PrivateRoutes><ViewAllUser/></PrivateRoutes>
@@ -47,6 +53,10 @@ const router =createBrowserRouter([
             {
                 path:'uploadMaterials',
                 element:<PrivateRoutes><UploadMaterials/></PrivateRoutes>
+            },
+            {
+                path:'ViewMaterials',
+                element:<PrivateRoutes><ViewTutorMaterials/></PrivateRoutes>
             }
         ]
     },

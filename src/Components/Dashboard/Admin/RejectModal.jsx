@@ -21,7 +21,7 @@ const RejectModal = ({ session, refetch }) => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
+      confirmButtonText: "Yes, Reject it!",
       background: "#58a6af",
       customClass: {
         text: "text-white",

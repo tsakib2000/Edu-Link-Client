@@ -51,7 +51,7 @@ navigate('/')
                  <li><NavLink to='/dashboard/createStudySession'>Create study session</NavLink></li>
                  <li><NavLink to='/dashboard/studySession'>View all study sessions </NavLink></li>
                  <li><NavLink to='/dashboard/uploadMaterials'>Upload materials</NavLink></li>
-                 <li><NavLink to='/dashboard/ViewMaterial'>View all materials</NavLink></li>
+                 <li><NavLink to='/dashboard/ViewMaterials'>View all materials</NavLink></li>
                  </ul>
                }
           {   role === 'admin' && <ul className="menu p-8 space-y-4 *:text-white *:font-semibold ">
