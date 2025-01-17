@@ -7,11 +7,13 @@ const MaterialCard = ({ material, handleUpdate,handleDelete}) => {
     <>
       <div className="border bg-white shadow-md rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
         {/* Image */}
-        <img
+      <a href={photoUrl} target="_blank">
+      <img
           src={photoUrl}
           alt="Material"
           className="w-full h-48 object-cover"
         />
+      </a>
 
         {/* Content */}
         <div className="p-5">
