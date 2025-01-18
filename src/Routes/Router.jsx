@@ -56,10 +56,7 @@ const router = createBrowserRouter([
         
         ),
       },
-      {
-        path:'checkout/:id',
-        element:<Checkout/>
-      },
+ 
       {
         path: "createNote",
         element: (
@@ -141,6 +138,12 @@ const router = createBrowserRouter([
         ),
       },
     ],
+  },
+  {
+  
+      path:'checkout/:id',
+      element:<PrivateRoutes><Checkout/></PrivateRoutes>
+    
   },
   {
     path: "signup",

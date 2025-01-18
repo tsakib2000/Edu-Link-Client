@@ -1,15 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
-import useAuth from "../../Hooks/useAuth";
+ 
 import {  isAfter, isBefore, parseISO } from "date-fns";
 import toast from "react-hot-toast";
 const SessionDetails = () => {
   const navigate = useNavigate();
-  const { user } = useAuth();
+ 
   const { id } = useParams();
   const axiosSecure = useAxiosSecure();
-  console.log(id);
+ 
   const { data: session = {} } = useQuery({
     queryKey: ["session", id],
     queryFn: async () => {
@@ -45,7 +45,7 @@ const SessionDetails = () => {
      if(fee<=0){
         toast.success('session booked')
      }else{
-        navigate(`/dashboard/checkout/${_id}`);
+        navigate(`/checkout/${_id}`);
 
      }
   };
