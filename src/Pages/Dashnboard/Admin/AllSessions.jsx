@@ -163,7 +163,7 @@ try{
                     <th>image</th>
                     <th>Title</th>
                     <th>tutor email</th>
-                    <th>Action</th>
+                    <th>status</th>
                   </tr>
                 </thead>
                 <tbody>

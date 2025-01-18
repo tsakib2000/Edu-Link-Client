@@ -14,68 +14,146 @@ import UploadMaterials from "../Pages/Dashnboard/Tutor/UploadMaterials";
 import DashboardHome from "../Pages/Dashnboard/DashboardHome";
 import ViewTutorMaterials from "../Pages/Dashnboard/Tutor/ViewTutorMaterials";
 import AllMaterials from "../Pages/Dashnboard/Admin/AllMaterials";
+import SessionDetails from "../Pages/Home/SessionDetails";
+import ViewBooked from "../Pages/Dashnboard/Student/ViewBooked";
+import CreateNote from "../Pages/Dashnboard/Student/CreateNote";
+import ManagePersonalNotes from "../Pages/Dashnboard/Student/ManagePersonalNotes";
+import ViewStudyMaterials from "../Pages/Dashnboard/Student/ViewStudyMaterials";
+import Checkout from "../Pages/PaymentPage/Checkout";
 
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Root />,
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
+      {
+        path: "/details/:id",
+        element: (
+          <PrivateRoutes>
+            <SessionDetails />
+          </PrivateRoutes>
+        ),
+      },
+    ],
+  },
+  {
+    path: "dashboard",
+    element: (
+      <PrivateRoutes>
+        <Dashboard />
+      </PrivateRoutes>
+    ),
+    children: [
+      {
+        path: "viewBooked",
+        element: (
+          
+            <ViewBooked />
+        
+        ),
+      },
+      {
+        path:'checkout/:id',
+        element:<Checkout/>
+      },
+      {
+        path: "createNote",
+        element: (
+         
+            <CreateNote />
+          
+        ),
+      },
+      {
+        path:'manageNotes',
+        element:<ManagePersonalNotes/>
+      },
+      {
+        path:'ViewMaterial',
+        element:<ViewStudyMaterials/>
+      },
+      {
+        path: "dashboardHome",
+        element: (
+          <PrivateRoutes>
+            <DashboardHome />
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: "viewAllUser",
+        element: (
+          <PrivateRoutes>
+            <ViewAllUser />
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: "AllSession",
+        element: (
+          <PrivateRoutes>
+            <AllSessions />
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: "viewAllMaterials",
+        element: (
+          <PrivateRoutes>
+            <AllMaterials />
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: "createStudySession",
+        element: (
+          <PrivateRoutes>
+            <CreateStudySession />
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: "studySession",
+        element: (
+          <PrivateRoutes>
+            <AllStudySessions />
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: "uploadMaterials",
+        element: (
+          <PrivateRoutes>
+            <UploadMaterials />
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: "ViewMaterials",
+        element: (
+          <PrivateRoutes>
+            <ViewTutorMaterials />
+          </PrivateRoutes>
+        ),
+      },
+    ],
+  },
+  {
+    path: "signup",
+    element: <Signup />,
+  },
+  {
+    path: "signin",
+    element: <Signin />,
+  },
+  {
+    path: "*",
+    element: <Error />,
+  },
+]);
 
-const router =createBrowserRouter([
-    {
-        path:'/',
-        element:<Root/>,
-        children:[
-            {
-                path:'/',
-                element:<Home/>
-            }
-        ]
-    },
-    {
-        path:'dashboard',
-        element:<PrivateRoutes><Dashboard/></PrivateRoutes>,
-        children:[
-            {
-                path:'dashboardHome',
-                element:<PrivateRoutes><DashboardHome/></PrivateRoutes>
-            },
-            {
-                path:'viewAllUser',
-                element:<PrivateRoutes><ViewAllUser/></PrivateRoutes>
-            },
-            {
-                path:'AllSession',
-                element:<PrivateRoutes><AllSessions/></PrivateRoutes>
-            },{
-                path:'viewAllMaterials',
-                element:<PrivateRoutes><AllMaterials/></PrivateRoutes>
-            },
-            {
-                path:'createStudySession',
-                element:<PrivateRoutes><CreateStudySession/></PrivateRoutes>
-            },
-            {
-                path:'studySession',
-                element:<PrivateRoutes><AllStudySessions/></PrivateRoutes>
-            },
-            {
-                path:'uploadMaterials',
-                element:<PrivateRoutes><UploadMaterials/></PrivateRoutes>
-            },
-            {
-                path:'ViewMaterials',
-                element:<PrivateRoutes><ViewTutorMaterials/></PrivateRoutes>
-            }
-        ]
-    },
-    {
-        path:'signup',
-        element:<Signup/>
-    },
-    {
-        path:'signin',
-        element:<Signin/>
-    },
-    {
-        path:'*',
-        element:<Error/>
-    }
-])
-
-export default router
+export default router;

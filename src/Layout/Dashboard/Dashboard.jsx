@@ -5,19 +5,21 @@ import useAuth from "../../Hooks/useAuth";
 import LoadingSpinner from "../../Components/LoadingSpinner";
 
 
+
 const Dashboard = () => {
     const {user,signOutUser}=useAuth();
     const navigate=useNavigate()
     const axiosSecure=useAxiosSecure();
-const {data:users={},isLoading}=useQuery({
+  
+const {data:users ,isLoading}=useQuery({
     queryKey:['users',user?.email],
     enabled:!!user?.email,
-    queryFn: async()=>{
-        const {data} = await axiosSecure.get(`/users/${user?.email}`)
-
+    queryFn:async()=>{
+        const {data} = await axiosSecure.get(`/users/role/${user?.email}`)
         return data
     }
 })
+
 if(isLoading)return <LoadingSpinner/>
 const {role,name}=users;
 const handleSignOut=()=>{
@@ -26,6 +28,7 @@ const handleSignOut=()=>{
 navigate('/')
     })
 }
+
     return (
      <>
      

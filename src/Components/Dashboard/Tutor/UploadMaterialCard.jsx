@@ -8,10 +8,10 @@ import Swal from "sweetalert2";
 import { FaSpinner } from "react-icons/fa";
 
 const UploadMaterialCard = ({ user, session }) => {
-  const { _id, title,tutorEmail } = session;
+  const { _id, title,tutorEmail,sessionPhoto } = session;
   const [loading, setLoading] = useState(false);
   const axiosSecure = useAxiosSecure();
-
+console.log(session);
   const handleMaterialUpload = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -52,14 +52,7 @@ const UploadMaterialCard = ({ user, session }) => {
     <div className=" mx-auto p-8 rounded-sm bg-[#cedadb]">
       <form onSubmit={handleMaterialUpload} className="space-y-6">
         {/* Title */}
-        <div>
-          <label className="block text-gray-700 font-medium mb-2 uppercase">
-            Title
-          </label>
-          <p className="bg-gray-100 px-4 py-2 rounded-md text-gray-600">
-            {title}
-          </p>
-        </div>
+      <img className="h-48 object-cover" src={sessionPhoto} alt="" />
 
         {/* Study Session ID (Read-only) */}
         <div>
@@ -103,7 +96,7 @@ const UploadMaterialCard = ({ user, session }) => {
             type="url"
             name="link"
             placeholder="https://drive.google.com/..."
-            className="input input-bordered w-full h-40"
+            className="input input-bordered w-full h-20"
           />
         </div>
 
