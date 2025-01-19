@@ -1,15 +1,18 @@
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
- 
-import {  isAfter, isBefore, parseISO } from "date-fns";
+
+import { isAfter, isBefore, parseISO } from "date-fns";
 import toast from "react-hot-toast";
+import Swal from "sweetalert2";
+import useAuth from "../../Hooks/useAuth";
 const SessionDetails = () => {
+  const { user } = useAuth();
   const navigate = useNavigate();
- 
+
   const { id } = useParams();
   const axiosSecure = useAxiosSecure();
- 
+
   const { data: session = {} } = useQuery({
     queryKey: ["session", id],
     queryFn: async () => {
@@ -19,7 +22,6 @@ const SessionDetails = () => {
   });
 
   const {
-    _id,
     title,
     description,
     fee,
@@ -32,24 +34,51 @@ const SessionDetails = () => {
     classEnd,
     registrationStart,
     registrationEnd,
-    review,
+   
   } = session;
+  const { _id, ...newSession } = session;
+  newSession.sessionId = _id;
+  newSession.studentEmail = user?.email;
   const currentDate = new Date();
   const startDate = registrationStart ? parseISO(registrationStart) : null;
   const endDate = registrationEnd ? parseISO(registrationEnd) : null;
   const isRegistrationOpen =
     isAfter(currentDate, startDate) && isBefore(currentDate, endDate);
 
-  const handleBookNow = () => {
-   
-     if(fee<=0){
-        toast.success('session booked')
-     }else{
-        navigate(`/checkout/${_id}`);
-
-     }
+  const handleBookNow = async () => {
+    if (fee <= 0) {
+      try {
+        await axiosSecure.post("/bookSession", newSession);
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Session Booked successfully",
+          showConfirmButton: false,
+          background: "#58a6af",
+          customClass: {
+            text: "text-white",
+            title: "text-white font-bold",
+          },
+          timer: 1500,
+        });
+        navigate("/dashboard");
+      } catch (err) {
+        toast.error(err.message);
+      }
+    } else {
+      navigate(`/checkout/${_id}`);
+    }
   };
 
+  const { data: reviews = [] } = useQuery({
+    queryKey: ["reviews", _id],
+    enabled: !!_id,
+    queryFn: async () => {
+      const { data } = await axiosSecure.get(`/reviews/${_id}`);
+      return data;
+    },
+  });
+  console.log(reviews);
   return (
     <>
       <div className="min-h-screen bg-gradient-to-r from-gray-100 via-blue-50 to-gray-100 py-10 px-5">
@@ -108,36 +137,28 @@ const SessionDetails = () => {
           <h2 className="my-2 text-center text-2xl font-semibold">
             Student Review
           </h2>
-          {review ?(
-            <div className="flex items-center p-4 bg-white border-2 border-gray-200 rounded-lg shadow-sm">
-              <div className="p-3 mr-4 bg-blue-500 text-white rounded-full">
-                <svg
-                  className="w-6 h-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1M5 19h14a2 2 0 002-2v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5a2 2 0 01-2 2z"
-                  ></path>
-                </svg>
-              </div>
-              <div>
-                <p className="mb-2 text-sm font-medium text-gray-900">
-                  Projects
-                </p>
-                <p className="text-sm font-normal text-gray-800">
-                  Unlimted projects for you
-                </p>
-              </div>
+
+     {
+      reviews.length <=0 ?'No reviews'   :  <div className="grid md:grid-cols-2 gap-4">
+      {reviews &&
+        reviews?.map((review) => (
+          <div key={review._id} className="flex items-center p-4 bg-white border-2 border-gray-200 rounded-lg shadow-sm">
+            <div>
+              <p className="mb-2 text-sm font-medium text-gray-900 uppercase">
+                {review.studentName}
+              </p>
+              <p className="text-sm font-normal text-gray-800">
+              {/*TODO: set rating as stars */}
+              <span className="font-bold">Rating:</span>  {review.rating}
+              </p>
+              <p className="text-sm font-normal text-gray-800">
+              <span className="font-bold">Review:</span>  {review.review}
+              </p>
             </div>
-          ): (
-            "No review"
-          ) }
+          </div>
+        ))}
+    </div>
+     }
         </div>
       </div>
     </>

@@ -5,7 +5,7 @@ import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 
 const GoogleLogin = () => {
-  const {googleSignIn,setUser}=useAuth();
+  const {googleSignIn,setUser,setLoading}=useAuth();
   const navigate=useNavigate();
   const axiosPublic=useAxiosPublic();
   const handleGoogleSignIn=()=>{
@@ -21,6 +21,7 @@ const GoogleLogin = () => {
    }
       await   axiosPublic.post('/users',userInfo)
       navigate("/");
+      setLoading(false)
     })
     .catch((error) => {
       const showError=(error.message);

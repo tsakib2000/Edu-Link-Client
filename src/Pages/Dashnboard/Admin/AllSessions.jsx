@@ -55,25 +55,22 @@ const AllSessions = () => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!"
-    }).then(async(result) => {
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await axiosSecure.delete(`/session/${id}`);
 
-if (result.isConfirmed) {
-try{
-  await axiosSecure.delete(`/session/${id}`)
-  
-  Swal.fire({
-    title: "Deleted!",
-    text: "Session has been deleted.",
-    icon: "success"
-  });
-  refetch()
-}catch(err){
-  toast.error(err.message)
-}
-}
-
-   
+          Swal.fire({
+            title: "Deleted!",
+            text: "Session has been deleted.",
+            icon: "success",
+          });
+          refetch();
+        } catch (err) {
+          toast.error(err.message);
+        }
+      }
     });
   };
   return (
@@ -127,8 +124,8 @@ try{
                 <tr>
                   <th>image</th>
                   <th>Title</th>
-                  <th>Job</th>
-
+                  <th>status</th>
+                  <th>tutor email</th>
                   <th>Action</th>
                 </tr>
               </thead>

@@ -20,6 +20,7 @@ import CreateNote from "../Pages/Dashnboard/Student/CreateNote";
 import ManagePersonalNotes from "../Pages/Dashnboard/Student/ManagePersonalNotes";
 import ViewStudyMaterials from "../Pages/Dashnboard/Student/ViewStudyMaterials";
 import Checkout from "../Pages/PaymentPage/Checkout";
+import BookedDetails from "../Pages/Dashnboard/Student/BookedDetails";
 
 const router = createBrowserRouter([
   {
@@ -59,11 +60,7 @@ const router = createBrowserRouter([
  
       {
         path: "createNote",
-        element: (
-         
-            <CreateNote />
-          
-        ),
+        element:<CreateNote />
       },
       {
         path:'manageNotes',
@@ -72,6 +69,11 @@ const router = createBrowserRouter([
       {
         path:'ViewMaterial',
         element:<ViewStudyMaterials/>
+      },
+      {
+
+        path:'bookedDetails/:id',
+        element:<BookedDetails/>
       },
       {
         path: "dashboardHome",

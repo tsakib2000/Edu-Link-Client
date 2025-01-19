@@ -27,7 +27,7 @@ const {fee}=session
       </h1>
       <div className="w-10/12 mx-auto p-8">
         <Elements stripe={stripePromise}>
-          <CheckoutForm fee={fee}  />
+          <CheckoutForm session={session}  />
         </Elements>
       </div>
     </div>
