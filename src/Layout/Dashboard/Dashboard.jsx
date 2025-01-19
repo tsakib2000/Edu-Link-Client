@@ -8,7 +8,7 @@ const Dashboard = () => {
   const { user, signOutUser } = useAuth();
   const navigate = useNavigate();
   const axiosSecure = useAxiosSecure();
-
+console.log(user);
   const { data: users, isLoading } = useQuery({
     queryKey: ["users", user?.email],
     enabled: !!user?.email,

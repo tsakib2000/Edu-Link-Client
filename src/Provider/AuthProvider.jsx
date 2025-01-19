@@ -1,5 +1,6 @@
 import {
   createUserWithEmailAndPassword,
+  GithubAuthProvider,
   GoogleAuthProvider,
   onAuthStateChanged,
   signInWithEmailAndPassword,
@@ -17,6 +18,7 @@ import useAxiosPublic from './../Hooks/useAxiosPublic';
 // eslint-disable-next-line react-refresh/only-export-components
 export const AuthContext = createContext(null);
  const googleProvider = new GoogleAuthProvider();
+ const githubProvider = new GithubAuthProvider();
 const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [user,setUser]=useState(null)
@@ -32,6 +34,10 @@ const signOutUser=()=>{
 const signInUser=(email,password)=>{
   setLoading(true);
   return signInWithEmailAndPassword(auth,email,password)
+}
+const githubSignIn=()=>{
+setLoading(true)
+return signInWithPopup(auth , githubProvider)
 }
 
 const googleSignIn=()=>{
@@ -73,7 +79,8 @@ setLoading(false)
     setUser,
     updateUserProfile,
     signInUser,
-    googleSignIn
+    googleSignIn,
+    githubSignIn
   };
   return (
     <AuthContext.Provider value={authInfo}>
