@@ -5,15 +5,32 @@ import Swal from "sweetalert2";
 import { useState } from "react";
 
 const ViewAllUser = () => {
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
+  const [userPerPage, setUserPerPage] = useState(4);
+  const [currentPage, setCurrentPage] = useState(0);
   const axiosSecure = useAxiosSecure();
+
+  const {data:count}=useQuery({
+    queryKey:['count'],
+    queryFn:async()=>{
+      const {data}=await axiosSecure.get('/user-count')
+      return data
+    }
+  })
+ 
   const { data: users = [], refetch } = useQuery({
-    queryKey: ["users",search],
+    queryKey: ["users", search,currentPage,userPerPage],
     queryFn: async () => {
-      const { data } = await axiosSecure.get(`/users?search=${search}`);
+      const { data } = await axiosSecure.get(`/users?search=${search}&page=${currentPage}&size=${userPerPage}`);
       return data;
     },
   });
+  const userCount =count.count;
+
+  const numberOfPages = Math.ceil(userCount / userPerPage);
+
+  const pages = [...Array(numberOfPages).keys()];
+
 
   const handleUpdateRole = async (id) => {
     const role = "admin";
@@ -41,21 +58,25 @@ const ViewAllUser = () => {
       }
     });
   };
+
+  const handleUserPerPage = (e) => {
+    const value = parseInt(e.target.value);
+    setUserPerPage(value);
+    setCurrentPage(0)
+  };
   return (
     <div className="p-8">
       <div className="flex justify-center items-center">
-        
-      <div className="flex flex-col mb-5">
-        
-        <h1 className="text-2xl md:text-4xl font-bold pb-3 text-[#58a6af] border-b-2 inline text-center my-5">
-          All USERS
-        </h1>
+        <div className="flex flex-col mb-5">
+          <h1 className="text-2xl md:text-4xl font-bold pb-3 text-[#58a6af] border-b-2 inline text-center my-5">
+            All USERS
+          </h1>
 
           <input
             onChange={(e) => setSearch(e.target.value)}
             className="input input-bordered input-md w-full max-w-xs"
             type="text"
-            name="search"  
+            name="search"
             placeholder={`🔍 Search by email`}
           />
         </div>
@@ -114,6 +135,33 @@ const ViewAllUser = () => {
             ))}
           </tbody>
         </table>
+        {/* pagination */}
+        <div className="flex  justify-center items-center mt-5">
+          
+          <div className="join">
+            {pages.map((page) => (
+              <button
+                className={`${
+                  currentPage == page && "border bg-teal-500 text-white"
+                } btn mr-1`}
+                onClick={() => setCurrentPage(page)}
+                key={page}
+              >
+                {page}
+              </button>
+            ))}
+            
+          </div>
+          <select
+            defaultValue={userPerPage}
+            onChange={handleUserPerPage}
+            className="select bg-gray-400"
+          >
+            <option value={4}>4</option>
+            <option value={8}>8</option>
+            <option value={12}>12</option>
+          </select>
+        </div>
       </div>
     </div>
   );

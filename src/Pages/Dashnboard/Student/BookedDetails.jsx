@@ -21,6 +21,7 @@ const BookedDetails = () => {
     },
   });
 
+
   const [rating, setRating] = useState(1);
   const {
     description,

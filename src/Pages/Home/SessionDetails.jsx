@@ -20,6 +20,15 @@ const SessionDetails = () => {
       return data;
     },
   });
+    const { data: users} = useQuery({
+      queryKey: ["users", user?.email],
+      enabled: !!user?.email,
+      queryFn: async () => {
+        const { data } = await axiosSecure.get(`/users/role/${user?.email}`);
+        return data;
+      },
+      retry: false,
+    });
 
   const {
     title,
@@ -46,7 +55,8 @@ const SessionDetails = () => {
     isAfter(currentDate, startDate) && isBefore(currentDate, endDate);
 
   const handleBookNow = async () => {
-    if (fee <= 0) {
+    if(users.role =='tutor' || users.role == 'admin') return toast.error('session booking not permitted')
+     if (fee <= 0) {
       try {
         await axiosSecure.post("/bookSession", newSession);
         Swal.fire({

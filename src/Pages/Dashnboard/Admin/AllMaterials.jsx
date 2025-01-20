@@ -2,17 +2,38 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import AllMaterialCard from "../../../Components/Dashboard/Admin/AllMaterialCard";
 import Swal from "sweetalert2";
+import { useState } from "react";
+import LoadingSpinner from "../../../Components/LoadingSpinner";
 
 const AllMaterials = () => {
   const axiosSecure = useAxiosSecure();
+    const [userPerPage, setUserPerPage] = useState(2);
+    const [currentPage, setCurrentPage] = useState(0);
+    const {data:count,isLoading}=useQuery({
+      queryKey:['count'],
+      queryFn:async()=>{
+        const {data}=await axiosSecure.get('/material-count')
+        return data
+      }
+    })
   const { data: materials = [], refetch } = useQuery({
-    queryKey: ["materials"],
+    queryKey: ["materials",currentPage,userPerPage],
     queryFn: async () => {
-      const { data } = await axiosSecure.get("/materials");
+      const { data } = await axiosSecure.get(`/materials?page=${currentPage}&size=${userPerPage}`);
       return data;
     },
   });
+  if(isLoading)return <LoadingSpinner/>
+  const materialCount =count.count;
 
+  const numberOfPages = Math.ceil(materialCount / userPerPage);
+
+  const pages = [...Array(numberOfPages).keys()];
+  const handleUserPerPage = (e) => {
+    const value = parseInt(e.target.value);
+    setUserPerPage(value);
+    setCurrentPage(0)
+  };
   const handleDelete = async (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -74,6 +95,32 @@ const AllMaterials = () => {
           />
         ))}
       </div>
+      <div className="flex  justify-center items-center mt-5">
+          
+          <div className="join">
+            {pages.map((page) => (
+              <button
+                className={`${
+                  currentPage == page && "border bg-teal-500 text-white"
+                } btn mr-1`}
+                onClick={() => setCurrentPage(page)}
+                key={page}
+              >
+                {page}
+              </button>
+            ))}
+            
+          </div>
+          <select
+            defaultValue={userPerPage}
+            onChange={handleUserPerPage}
+            className="select bg-gray-400"
+          >
+            <option value={4}>2</option>
+            <option value={8}>4</option>
+            <option value={12}>6</option>
+          </select>
+        </div>
     </div>
   );
 };

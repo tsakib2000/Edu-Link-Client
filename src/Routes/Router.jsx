@@ -89,7 +89,7 @@ const router = createBrowserRouter([
           <PrivateRoutes>
             <ViewAllUser />
           </PrivateRoutes>
-        ),
+        )
       },
       {
         path: "AllSession",

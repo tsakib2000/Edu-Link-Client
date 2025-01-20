@@ -19,7 +19,7 @@ const UploadMaterials = () => {
       <h2 className="text-3xl font-semibold text-center mb-6 text-gray-800">
         Upload Study Materials
       </h2>
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 mx-4">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-2 mx-4">
         {
             ApprovedSession.map(session=><UploadMaterialCard session={session} user={user}key={session._id}/>)
         }
