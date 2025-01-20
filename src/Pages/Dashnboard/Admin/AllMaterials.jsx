@@ -7,7 +7,7 @@ import LoadingSpinner from "../../../Components/LoadingSpinner";
 
 const AllMaterials = () => {
   const axiosSecure = useAxiosSecure();
-    const [userPerPage, setUserPerPage] = useState(2);
+    
     const [currentPage, setCurrentPage] = useState(0);
     const {data:count,isLoading}=useQuery({
       queryKey:['count'],
@@ -17,23 +17,19 @@ const AllMaterials = () => {
       }
     })
   const { data: materials = [], refetch } = useQuery({
-    queryKey: ["materials",currentPage,userPerPage],
+    queryKey: ["materials",currentPage],
     queryFn: async () => {
-      const { data } = await axiosSecure.get(`/materials?page=${currentPage}&size=${userPerPage}`);
+      const { data } = await axiosSecure.get(`/materials?page=${currentPage}&size=${2}`);
       return data;
     },
   });
   if(isLoading)return <LoadingSpinner/>
   const materialCount =count.count;
 
-  const numberOfPages = Math.ceil(materialCount / userPerPage);
+  const numberOfPages = Math.ceil(materialCount / 2);
 
   const pages = [...Array(numberOfPages).keys()];
-  const handleUserPerPage = (e) => {
-    const value = parseInt(e.target.value);
-    setUserPerPage(value);
-    setCurrentPage(0)
-  };
+
   const handleDelete = async (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -102,7 +98,7 @@ const AllMaterials = () => {
               <button
                 className={`${
                   currentPage == page && "border bg-teal-500 text-white"
-                } btn mr-1`}
+                } btn mr-1 bg-gray-400`}
                 onClick={() => setCurrentPage(page)}
                 key={page}
               >
@@ -111,15 +107,7 @@ const AllMaterials = () => {
             ))}
             
           </div>
-          <select
-            defaultValue={userPerPage}
-            onChange={handleUserPerPage}
-            className="select bg-gray-400"
-          >
-            <option value={4}>2</option>
-            <option value={8}>4</option>
-            <option value={12}>6</option>
-          </select>
+      
         </div>
     </div>
   );
