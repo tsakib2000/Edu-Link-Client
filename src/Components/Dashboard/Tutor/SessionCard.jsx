@@ -29,7 +29,7 @@ const SessionCard = ({ session,refetch }) => {
   }catch(err){
     toast.error(err.message)
   }
-  console.log(newSession);
+  
   }
   return (
     <div className="mx-auto flex flex-col justify-between h-full bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">

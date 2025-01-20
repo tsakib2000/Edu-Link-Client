@@ -11,7 +11,7 @@ const UploadMaterialCard = ({ user, session }) => {
   const { _id, title,tutorEmail,sessionPhoto } = session;
   const [loading, setLoading] = useState(false);
   const axiosSecure = useAxiosSecure();
-console.log(session);
+
   const handleMaterialUpload = async (e) => {
     e.preventDefault();
     setLoading(true);

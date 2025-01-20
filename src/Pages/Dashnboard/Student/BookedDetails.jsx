@@ -11,7 +11,7 @@ const BookedDetails = () => {
   const { id } = useParams();
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
-  console.log(id);
+
   const { data: bookedSession, isLoading } = useQuery({
     queryKey: ["bookedSession", id],
     enabled: !!id,

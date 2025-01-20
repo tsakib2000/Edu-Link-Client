@@ -28,7 +28,7 @@ const Signup = () => {
     
     createUser(email, password)
     .then( async (data) => {
-console.log(data);
+
       updateUserProfile(name, photoURL);
       setUser(data.user);
 
@@ -38,8 +38,8 @@ console.log(data);
         photoURL,
         role
       }
-     const {data:users} = await axiosPublic.post('/users',userInfo)
-console.log(users);
+    await axiosPublic.post('/users',userInfo)
+
       navigate('/');
      toast.success('Signup successful')
     });

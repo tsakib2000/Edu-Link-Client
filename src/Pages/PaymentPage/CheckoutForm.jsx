@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
@@ -25,7 +26,7 @@ const CheckoutForm = ({ session }) => {
     axiosSecure
       .post("/create-payment-intent", { fee })
       .then((res) => {
-        console.log(res.data.clientSecret);
+        
         setLoading(false);
         setClientSecret(res.data.clientSecret);
       })
@@ -53,11 +54,9 @@ const CheckoutForm = ({ session }) => {
       card,
     });
     if (error) {
-      console.log("payment error", error);
+  
       setError(error.message);
-    } else {
-      console.log("payment method", paymentMethod);
-    }
+    } 
 
     const { paymentIntent, error: confirmError } =
       await stripe.confirmCardPayment(clientSecret, {
@@ -70,9 +69,9 @@ const CheckoutForm = ({ session }) => {
         },
       });
     if (confirmError) {
-      console.log(confirmError);
+      toast.error(confirmError.message)
     } else {
-      console.log(paymentIntent);
+    
       if (paymentIntent.status == "succeeded") {
        
    try{

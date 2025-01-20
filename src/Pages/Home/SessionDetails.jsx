@@ -88,7 +88,7 @@ const SessionDetails = () => {
       return data;
     },
   });
-  console.log(reviews);
+ 
   return (
     <>
       <div className="min-h-screen bg-gradient-to-r from-gray-100 via-blue-50 to-gray-100 py-10 px-5">
