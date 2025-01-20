@@ -4,10 +4,10 @@ const StudyMaterialCard = ({ material }) => {
   const { sessionId, photoUrl, driveLink, tutorEmail, sessionTitle } = material;
 
   const handleDownload = () => {
-    const imageUrl = {photoUrl}; // Replace with your image URL
+    const imageUrl = {photoUrl}; 
     const anchor = document.createElement('a');
     anchor.href = imageUrl;
-    anchor.download =`material.jpg`; // Specify the downloaded file name
+    anchor.download =`material.jpg`; 
     anchor.click();
   };
   return (
