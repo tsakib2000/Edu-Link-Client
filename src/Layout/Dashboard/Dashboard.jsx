@@ -30,8 +30,8 @@ const Dashboard = () => {
   };
   return (
     <>
-      <div className="flex">
-        <div className="w-64 py-4 flex flex-col justify-between bg-[#58a6af]  min-h-screen  ">
+      <div className="flex flex-col md:flex-row">
+        <div className=" md:w-64 py-4 flex flex-col justify-between bg-[#58a6af]  min-h-screen  ">
           <div>
             <div className="flex flex-col justify-center items-center gap-4">
               <h1 className="text-center text-white font-semibold uppercase">
