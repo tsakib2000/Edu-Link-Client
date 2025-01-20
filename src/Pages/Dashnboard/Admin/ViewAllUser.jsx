@@ -3,6 +3,7 @@ import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import { useState } from "react";
+import LoadingSpinner from "../../../Components/LoadingSpinner";
 
 const ViewAllUser = () => {
   const [search, setSearch] = useState("");
@@ -10,7 +11,7 @@ const ViewAllUser = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const axiosSecure = useAxiosSecure();
 
-  const {data:count}=useQuery({
+  const {data:count,isLoading}=useQuery({
     queryKey:['count'],
     queryFn:async()=>{
       const {data}=await axiosSecure.get('/user-count')
@@ -25,6 +26,7 @@ const ViewAllUser = () => {
       return data;
     },
   });
+  if(isLoading)return <LoadingSpinner/>
   const userCount =count.count;
 
   const numberOfPages = Math.ceil(userCount / userPerPage);
