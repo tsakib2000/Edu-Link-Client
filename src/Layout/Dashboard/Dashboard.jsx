@@ -31,7 +31,7 @@ const Dashboard = () => {
   return (
     <>
       <div className="flex flex-col md:flex-row">
-        <div className=" md:w-64 py-4 flex flex-col justify-between bg-[#58a6af]  min-h-screen  ">
+        <div className=" md:w-64 py-4 flex flex-col  bg-[#58a6af]  min-h-screen  ">
           <div>
             <div className="flex flex-col justify-center items-center gap-4">
               <h1 className="text-center text-white font-semibold uppercase">
@@ -107,6 +107,8 @@ const Dashboard = () => {
               </ul>
             )}
           </div>
+
+          <div className="divider divider-neutral"></div>
           <div>
             <ul className="menu p-8 space-y-4 *:text-white *:font-semibold ">
               <li>
