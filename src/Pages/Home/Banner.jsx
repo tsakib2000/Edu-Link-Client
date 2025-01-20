@@ -5,7 +5,7 @@ import slide1 from "../../assets/slide-1.jpg";
 const Banner = () => {
   return (
 <div
-  className="hero h-[500px]"
+  className="hero h-[500px] mb-5 "
   style={{
     backgroundImage: `url(${slide1})`,
   }}>
