@@ -12,7 +12,7 @@ const GoogleLogin = () => {
     googleSignIn()
     .then(async(data) => {
       toast.success("SignIn successful");
-      setUser(data);
+      setUser(data.user);
       const userInfo={
         name:data.user.displayName,
         email:data.user.email,

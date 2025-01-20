@@ -27,7 +27,6 @@ console.log(user);
       navigate("/");
     });
   };
-
   return (
     <>
       <div className="flex">
