@@ -40,7 +40,7 @@ This is the client-side implementation of the Collaborative Study Platform, a re
 ## Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/Programming-Hero-Web-Course4/b10a12-client-side-tsakib2000
+   git clone https://github.com/Programming-Hero-Web-Course4/b10a12-client-side-tsakib2000.git
    ```
 2. Navigate to the client directory:
    ```bash
