@@ -8,14 +8,18 @@ import GoogleLogin from "../../Components/SocialLogin/googleLogin";
 import GithubLogin from "../../Components/SocialLogin/GithubLogin";
 import Lottie from "lottie-react";
 import registration from '../../assets/registration.json'
+import { useState } from "react";
+import { FaSpinner } from "react-icons/fa";
 
 const Signup = () => {
   const { createUser, setUser, updateUserProfile } = useAuth();
+  const [loading,setLoading]=useState(false)
   const navigate = useNavigate();
 
   const axiosPublic=useAxiosPublic()
   const handleSignup = async (e) => {
     e.preventDefault();
+    setLoading(true)
     const form = e.target;
     const name = form.name.value;
     const email = form.email.value;
@@ -42,6 +46,7 @@ const Signup = () => {
 
       navigate('/');
      toast.success('Signup successful')
+     setLoading(false)
     });
   };
   return (
@@ -116,7 +121,11 @@ const Signup = () => {
             </div>
             <div className="form-control mt-6">
               <button className="btn bg-[#58a6af] text-white rounded-none">
-                Signup
+                {loading ? (
+                             <FaSpinner className="animate-spin text-center" />
+                           ) : (
+                             "Signup"
+                           )}
               </button>
             </div>
             <div className="divider">OR</div>
