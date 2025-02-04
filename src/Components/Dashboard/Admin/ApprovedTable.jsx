@@ -23,8 +23,8 @@ const ApprovedTable = ({session,handleUpdate,handleDelete}) => {
                 <td className=""><span className="bg-green-300  p-1 rounded-md">{status}</span></td>
                 <td>{tutorEmail}</td>
                 <th className="flex flex-col gap-4">
-                  <button onClick={()=>handleUpdate(_id)} className="btn btn-sm bg-blue-400 text-white"> update</button>
-                  <button onClick={()=>handleDelete(_id)} className="btn btn-sm bg-red-400 text-white"> update</button>
+                  <button onClick={()=>handleUpdate(_id)} className="btn btn-sm bg-blue-400 text-white"> Update</button>
+                  <button onClick={()=>handleDelete(_id)} className="btn btn-sm bg-red-400 text-white">Delete</button>
                 </th>
               </tr>
     );

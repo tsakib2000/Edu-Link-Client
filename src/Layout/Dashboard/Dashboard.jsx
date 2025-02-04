@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useAuth from "../../Hooks/useAuth";
 import LoadingSpinner from "../../Components/LoadingSpinner";
-
+import { FaUsers } from "react-icons/fa";
 const Dashboard = () => {
   const { user, signOutUser } = useAuth();
 
@@ -31,10 +31,13 @@ const Dashboard = () => {
   return (
     <>
       <div className="flex flex-col md:flex-row">
+        
         <div className=" md:w-64 py-4 flex flex-col  bg-[#58a6af]  min-h-screen  ">
+        
+
           <div>
             <div className="flex flex-col justify-center items-center gap-4">
-              <h1 className="text-center text-white font-semibold uppercase">
+              <h1 className="text-center text-white font-semibold uppercase ">
                 {name}
               </h1>
               <button className="btn w-max btn-xs font-bold text-xs text-center text-[#58a6af] uppercase ">
@@ -90,9 +93,9 @@ const Dashboard = () => {
               </ul>
             )}
             {role === "admin" && (
-              <ul className="menu p-8 space-y-4 *:text-white *:font-semibold ">
-                <li>
-                  <NavLink to="/dashboard/viewAllUser">View all users</NavLink>
+              <ul className="menu p-8 space-y-4 *:text-white *:font-semibold *:text-base ">
+                <li className="text-base">
+                  <NavLink to="/dashboard/viewAllUser"><FaUsers /> All users</NavLink>
                 </li>
                 <li>
                   <NavLink to="/dashboard/AllSession">
@@ -123,7 +126,6 @@ const Dashboard = () => {
           </div>
         </div>
         <div className="grid-cols-8 w-full bg-[#f8fbfb]">
-            
           <Outlet />
         </div>
       </div>

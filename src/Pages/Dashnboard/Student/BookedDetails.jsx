@@ -30,7 +30,6 @@ const BookedDetails = () => {
     sessionDuration,
     sessionId,
     sessionPhoto,
-
     title,
     tutorEmail,
     tutorName,
@@ -87,7 +86,7 @@ const BookedDetails = () => {
               <span className="font-medium">Tutor Email:</span> {tutorEmail}
             </p>
             <p className="text-lg font-semibold text-gray-700">
-              <span className="font-medium">Class Duration:</span>{" "}
+              <span className="font-medium">Class Duration:</span>
               {sessionDuration} minutes
             </p>
             <p className="text-lg font-semibold text-gray-700">
@@ -136,7 +135,7 @@ const BookedDetails = () => {
               <select
                 id="rating"
                 value={rating}
-                onChange={(e) => setRating(Number(e.target.value))}
+                onChange={(e) =>setRating(Number(e.target.value))}
                 className="mt-2 block w-full p-3 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               >
