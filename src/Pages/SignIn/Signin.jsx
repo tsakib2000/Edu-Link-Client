@@ -28,14 +28,11 @@ const navigate=useNavigate();
     }
     return (
         <div className="hero bg-base-200 min-h-screen">
-        <div className="hero-content flex-col md:flex-row-reverse">
+        <div className="hero-content grid grid-cols-12 ">
          
             
-         <div className="hidden md:block">
-<Lottie animationData={login}></Lottie>
-         </div>
-          
-          <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+
+          <div className="card bg-base-100 col-span-12 md:col-span-7 w-full   shadow-2xl">
             <form onSubmit={handleSignin} className="card-body">
             <h1 className="text-2xl text-center font-bold">Login now</h1>
         
@@ -88,6 +85,10 @@ const navigate=useNavigate();
             </form>
          
           </div>
+                   <div className="hidden md:block  md:col-span-5">
+<Lottie animationData={login}></Lottie>
+         </div>
+          
         </div>
       </div>
     );

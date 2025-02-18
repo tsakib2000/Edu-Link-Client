@@ -21,6 +21,7 @@ import ManagePersonalNotes from "../Pages/Dashnboard/Student/ManagePersonalNotes
 import ViewStudyMaterials from "../Pages/Dashnboard/Student/ViewStudyMaterials";
 import Checkout from "../Pages/PaymentPage/Checkout";
 import BookedDetails from "../Pages/Dashnboard/Student/BookedDetails";
+import AllSessionsPage from "../Pages/AllSessions/AllSessionsPage";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path:"/studySessions",
+        element:<AllSessionsPage/>
       },
       {
         path: "/details/:id",

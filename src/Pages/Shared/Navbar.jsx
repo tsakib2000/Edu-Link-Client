@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import logo from "../../assets/icons8-study-48.png";
 const Navbar = () => {
@@ -7,7 +7,13 @@ const Navbar = () => {
   const navbarLink = (
     <>
       <li>
-      <Link to="/dashboard/dashboardHome">Dashboard</Link>
+      <NavLink to="/">Home</NavLink>
+      </li>
+      <li>
+      <NavLink to="/dashboard/dashboardHome">Dashboard</NavLink>
+      </li>
+      <li>
+      <NavLink to="/studySessions">All Study Session</NavLink>
       </li>
     </>
   );
