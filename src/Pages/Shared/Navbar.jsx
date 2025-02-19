@@ -10,15 +10,17 @@ const Navbar = () => {
       <NavLink to="/">Home</NavLink>
       </li>
       <li>
-      <NavLink to="/dashboard/dashboardHome">Dashboard</NavLink>
-      </li>
-      <li>
       <NavLink to="/studySessions">All Study Session</NavLink>
       </li>
+      {
+        user && <li>
+        <NavLink to="/dashboard/dashboardHome">Dashboard</NavLink>
+        </li>
+      }
     </>
   );
   return (
-    <div className="navbar fixed backdrop-blur-md md:w-11/12 text-white z-10 top-0">
+    <div className="navbar fixed backdrop-blur-md md:w-11/12  z-10 top-0">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
