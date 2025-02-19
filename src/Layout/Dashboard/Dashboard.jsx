@@ -109,16 +109,29 @@ const Dashboard = () => {
                 </li>
               </ul>
             )}
+     
           </div>
 
           <div className="divider divider-neutral"></div>
           <div>
             <ul className="menu p-8 space-y-4 *:text-white *:font-semibold ">
+
               <li>
                 <Link to="/" className="text-center">
                   Home
                 </Link>
+             
               </li>
+              <li>
+                  <Link to="/dashboard/profile">
+                    Profile
+                  </Link>
+                </li>
+              <li>
+                  <Link to="/dashboard/overview">
+                  Overview
+                  </Link>
+                </li>
               <li>
                 <button onClick={handleSignOut}>Sign Out</button>
               </li>

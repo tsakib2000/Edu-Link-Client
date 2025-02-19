@@ -22,6 +22,8 @@ import ViewStudyMaterials from "../Pages/Dashnboard/Student/ViewStudyMaterials";
 import Checkout from "../Pages/PaymentPage/Checkout";
 import BookedDetails from "../Pages/Dashnboard/Student/BookedDetails";
 import AllSessionsPage from "../Pages/AllSessions/AllSessionsPage";
+import Profile from "../Pages/Dashnboard/Profile";
+import Overview from "../Pages/Dashnboard/Overview";
 
 const router = createBrowserRouter([
   {
@@ -144,6 +146,22 @@ const router = createBrowserRouter([
           </PrivateRoutes>
         ),
       },
+      {
+        path: "profile",
+        element: (
+          <PrivateRoutes>
+            <Profile/>
+          </PrivateRoutes>
+        ), 
+      },
+      {
+        path: "overview",
+        element: (
+          <PrivateRoutes>
+           <Overview/>
+          </PrivateRoutes>
+        ), 
+      }
     ],
   },
   {

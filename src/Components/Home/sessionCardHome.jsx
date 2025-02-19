@@ -3,7 +3,7 @@ import { isAfter, isBefore, parseISO } from "date-fns";
 import { Link } from "react-router-dom";
 
 const sessionCardHome = ({ session }) => {
-  const { title, description, _id, registrationStart, registrationEnd } =
+  const { title, description, _id, registrationStart, registrationEnd,fee } =
     session;
   const currentDate = new Date();
   const startDate = parseISO(registrationStart);
@@ -19,6 +19,8 @@ const sessionCardHome = ({ session }) => {
         </h5>
 
         <p className="mb-3 font-normal text-white ">{description}</p>
+        <p className="mb-3 font-bold  ">$ {fee == 0 ?'Free':fee}</p>
+
         <div className="flex justify-between items-center">
           <button
      
