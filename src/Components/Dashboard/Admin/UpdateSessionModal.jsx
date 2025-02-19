@@ -39,6 +39,10 @@ const UpdateSessionModal = ({session,refetch}) => {
         <div>
       <dialog id="update_Modal" className="modal">
   <div className="modal-box w-11/12 max-w-5xl">
+  <form method="dialog">
+      
+      <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+    </form>
     <h3 className="font-bold text-lg uppercase text-center">update session</h3>
     
     <div className="w-full p-4">
