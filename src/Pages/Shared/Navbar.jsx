@@ -2,23 +2,26 @@ import { Link, NavLink } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import logo from "../../assets/icons8-study-48.png";
 import { useEffect, useState } from "react";
+import { AiOutlineHome ,AiOutlineInfoCircle } from "react-icons/ai";
+import { BiBookAlt } from "react-icons/bi";
+import { MdDashboard } from "react-icons/md";
 const Navbar = () => {
   const { user, signOutUser } = useAuth();
 
   const navbarLink = (
     <>
       <li>
-      <NavLink to="/">Home</NavLink>
+      <NavLink to="/"><AiOutlineHome /> Home</NavLink>
       </li>
       <li>
-      <NavLink to="/studySessions">All Study Session</NavLink>
+      <NavLink to="/studySessions"><BiBookAlt/> All Study Session</NavLink>
       </li>
       <li>
-      <NavLink to="/about">About</NavLink>
+      <NavLink to="/about"><AiOutlineInfoCircle/>  About</NavLink>
       </li>
       {
         user && <li>
-        <NavLink to="/dashboard/dashboardHome">Dashboard</NavLink>
+        <NavLink to="/dashboard/dashboardHome"><MdDashboard className="w-5 h-5" /> Dashboard</NavLink>
         </li>
       }
     </>
