@@ -1,6 +1,7 @@
 import { Link, NavLink } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import logo from "../../assets/icons8-study-48.png";
+import { useEffect, useState } from "react";
 const Navbar = () => {
   const { user, signOutUser } = useAuth();
 
@@ -19,6 +20,15 @@ const Navbar = () => {
       }
     </>
   );
+  const [theme, setTheme] = useState('light');
+  const toggleTheme = () => {
+    
+    setTheme(theme === 'dark' ? 'light' : 'dark');
+   
+  };
+  useEffect(() => {
+    document.querySelector('html').setAttribute('data-theme', theme);
+  }, [theme]);
   return (
     <div className="navbar fixed backdrop-blur-md md:w-11/12  z-10 top-0">
       <div className="navbar-start">
@@ -78,6 +88,12 @@ const Navbar = () => {
             </button>
           </>
         )}
+          <input
+              onClick={toggleTheme}
+                type="checkbox"
+                value="synthwave"
+                className="toggle theme-controller"
+              />
       </div>
     </div>
   );
