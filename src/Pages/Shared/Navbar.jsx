@@ -13,6 +13,9 @@ const Navbar = () => {
       <li>
       <NavLink to="/studySessions">All Study Session</NavLink>
       </li>
+      <li>
+      <NavLink to="/about">About</NavLink>
+      </li>
       {
         user && <li>
         <NavLink to="/dashboard/dashboardHome">Dashboard</NavLink>
