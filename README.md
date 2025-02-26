@@ -1,3 +1,6 @@
+### [Server Repo Link](https://github.com/tsakib2000/Edu-Link-Server)
+---
+
 # EduLink - Client
 
 ## Overview
@@ -65,5 +68,3 @@ This is the client-side implementation of the Collaborative Study Platform, a re
  Email:isakib49@gmail.com
  Password: 123456
  ```
-### [Server Repo Link](https://github.com/tsakib2000/Edu-Link-Server)
----
