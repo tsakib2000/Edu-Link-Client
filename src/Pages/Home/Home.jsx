@@ -1,5 +1,5 @@
 import { Helmet } from 'react-helmet-async';
-import Banner from './Banner';
+
 import StudySessionHome from './StudySessionHome';
 import TutorSection from './TutorSection';
 import Testimonial from '../../Components/Home/Testimonial';
@@ -13,7 +13,7 @@ const Home = () => {
         <title>Home</title>
     </Helmet>
         <div>
-          <Banner/>
+         
           <StudySessionHome/>
           <TutorSection/>
 <Testimonial/>
