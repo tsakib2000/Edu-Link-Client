@@ -5,7 +5,7 @@ import bg2 from '../../assets/NewsBg2.png'
 const NewsLetter = () => {
     return (
         <div>
-            <section className="text-center flex relative mb-5 bg-[#58a6af] p-4">
+            <section className="text-center flex justify-center items-center relative mb-5 bg-[#58a6af] p-4">
                 <img className='absolute h-40 top-0 left-0' src={bg1} alt="" />
                 <img className='absolute h-40 -bottom-1 right-0' src={bg2} alt="" />
                 <div className="z-10">
@@ -17,9 +17,7 @@ const NewsLetter = () => {
                         Join Now
                     </Link>
                 </div>
-                <div>
 
-                </div>
             </section>
         </div>
     );
