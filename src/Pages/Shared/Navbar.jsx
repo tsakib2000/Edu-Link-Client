@@ -69,7 +69,7 @@ const Navbar = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1 *:font-bold">{navbarLink}</ul>
       </div>
-      <div className="navbar-end gap-4 flex flex-col-reverse md:flex-row">
+      <div className="navbar-end gap-4 flex  md:flex-row">
         {user ? (
           <>
             <button

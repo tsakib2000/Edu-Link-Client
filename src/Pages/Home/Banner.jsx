@@ -8,14 +8,12 @@ import { FaLongArrowAltRight } from "react-icons/fa";
 const Banner = () => {
   return (
     <div
-      className=" items-center h-[500px] mb-5 *:text-white  bg-[#58a6af] "
-    // style={{
-    //   backgroundImage: `url(${slide1})`,
-    // }}
+      className=" items-center h-[500px] mb-5   bg-[#58a6af] "
+
     >
 
-      <div className="grid grid-cols-12 items-center h-full w-11/12 mx-auto">
-        <div className="hero-content text-neutral-content  col-span-5">
+      <div className=" *:text-white md:grid  md:grid-cols-12 items-center h-full w-11/12 mx-auto">
+        <div className="hero-content text-neutral-content  md:col-span-5">
           <div className="">
             <h1 className="mb-5 text-5xl font-bold">Empowering Collaboration</h1>
             <p className="mb-5">
@@ -24,7 +22,7 @@ const Banner = () => {
             <Link to='/studySessions' className="btn btn-sm left-0">Enroll Now                            <FaLongArrowAltRight /></Link>
           </div>
         </div>
-        <div className=" col-span-7">
+        <div className=" md:col-span-7">
           <img src={slide1} alt="" />
         </div>
       </div>
