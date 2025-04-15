@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 const TutorCard = ({ tutor }) => {
-  const { name, email, photoURL, role } = tutor
+  const { name,photoURL, role } = tutor
   return (
     <div
       style={{
