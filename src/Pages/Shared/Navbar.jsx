@@ -62,7 +62,7 @@ const Navbar = () => {
             {navbarLink}
           </ul>
         </div>
-        <Link to="/" className="btn btn-ghost text-xl">
+        <Link to="/" className="flex items-center gap-2 font-bold text-xl">
           <img src={logo} alt="" /> EduLink
         </Link>
       </div>
@@ -74,7 +74,7 @@ const Navbar = () => {
           <>
             <button
               onClick={signOutUser}
-              className="!font-semibold btn shadow-2xl border-none  !bg-[#f8fbfb]"
+              className="!font-semibold btn shadow-2xl border-none btn-sm  !bg-[#f8fbfb]"
             >
               Sign Out
             </button>
@@ -86,10 +86,10 @@ const Navbar = () => {
           </>
         ) : (
           <>
-            <button className=" btn shadow-2xl border-none  !bg-[#f8fbfb]">
+            <button className=" btn shadow-2xl border-none btn-sm  !bg-[#f8fbfb]">
               <Link to="signin">Sign in</Link>
             </button>
-            <button className="btn  shadow-2xl border-none !bg-[#f8fbfb]">
+            <button className="btn  shadow-2xl border-none btn-sm !bg-[#f8fbfb]">
               <Link to="signup">Sign up</Link>
             </button>
           </>
