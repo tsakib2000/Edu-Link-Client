@@ -69,9 +69,10 @@ const Navbar = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1 *:font-bold">{navbarLink}</ul>
       </div>
-      <div className="navbar-end gap-4 flex  md:flex-row">
+      <div className="navbar-end gap-4 flex   md:flex-row">
         {user ? (
           <>
+         <div className="flex flex-col-reverse md:flex-row gap-2 justify-center items-center"> 
             <button
               onClick={signOutUser}
               className="!font-semibold btn shadow-2xl border-none btn-sm  !bg-[#f8fbfb]"
@@ -82,16 +83,14 @@ const Navbar = () => {
               <div className="ring-[#58a6af] ring-offset-base-100 w-12 rounded-full ring ring-offset-2">
                 <img referrerPolicy="no-referrer" src={user?.photoURL} />
               </div>
-            </div>
+            </div></div>
           </>
         ) : (
           <>
             <button className=" btn shadow-2xl border-none btn-sm  !bg-[#f8fbfb]">
               <Link to="signin">Sign in</Link>
             </button>
-            <button className="btn  shadow-2xl border-none btn-sm !bg-[#f8fbfb]">
-              <Link to="signup">Sign up</Link>
-            </button>
+         
           </>
         )}
           <input

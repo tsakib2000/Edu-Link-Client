@@ -21,6 +21,8 @@ const Signin = () => {
       await signInUser(email, password)
       navigate('/')
       toast.success('Signin successful')
+      setEmail("")
+      setPassword("")
     } catch (err) {
       toast.error(err.message)
     }
@@ -38,9 +40,9 @@ const Signin = () => {
 
         <div className="card bg-base-100 col-span-12 md:col-span-7 w-full   shadow-2xl">
 
+            <button onClick={handleCredential} type="button" className="btn bg-[#58a6af] text-white">Admin</button>
           <form onSubmit={handleSignin} className="card-body">
             <h1 className="text-2xl text-center font-bold">Login now</h1>
-            <button onClick={handleCredential} type="button" className="btn bg-[#58a6af] text-white">Admin</button>
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Email</span>
